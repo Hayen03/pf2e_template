@@ -1,0 +1,16 @@
+[package]
+name = "pf2e"
+version = "1.0.0"
+entrypoint = "lib.typ"
+authors = ["Léop Jetzer"]
+license = "MIT"
+description = "A template to create Pathfinder 2nd Edition homebrew content"
+
+repository = "https://github.com/Hayen03/pf2e_template"
+keywords = ["pathfinder"]
+categories = ["visualization"]
+
+[template]
+path = "template"
+entrypoint = "main.typ"
+thumbnail = "thumbnail.png"
