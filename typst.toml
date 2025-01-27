@@ -1,8 +1,8 @@
 [package]
 name = "pf2e"
-version = "1.0.0"
+version = "0.1.0"
 entrypoint = "lib.typ"
-authors = ["Léop Jetzer"]
+authors = ["Léo Jetzer"]
 license = "MIT"
 description = "A template to create Pathfinder 2nd Edition homebrew content"
 
