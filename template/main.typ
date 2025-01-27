@@ -1,5 +1,5 @@
-//#import "@preview/pf2e:1.0.0" : *
-#import "../lib.typ": *
+#import "@preview/pf2e:1.0.0" : *
+//#import "../lib.typ": *
 
 #show: it => pf2e(
   it,
