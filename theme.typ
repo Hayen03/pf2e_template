@@ -16,8 +16,8 @@
 #let TABLE_FILL = (rgb("#cecfbe"), rgb("#eff0e4"))
 #let INFOBOX_COLOR = DARK_GREEN
 #let BLOCK_FONT = "Open Sans"
-#let MAIN_TEXT_FONT = "Libre Baskerville"
-#let BIG_HEADING_FONT = "Eagle Lake"
+#let MAIN_TEXT_FONT = ("Sabon", "Libre Baskerville",)
+#let BIG_HEADING_FONT = ("Taroca", "Eagle Lake",)
 #let BLOCK_HEADING_FONT = "Bebas Neue"
 #let SMALL_HEADING_FONT = "Roboto"
 #let CENTER_CELL_PATTERN = regex("^[+-]?\d+(?:(?:\s*(?i:gp|sp|cp|pp))?|L).*$")
