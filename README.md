@@ -13,7 +13,7 @@ Starts with dropping the package's folder in your project's directory and import
 -->
 
 ```typst
-#import "pf2e/lib.typ": *
+#import "pf2e_template/lib.typ": *
 ```
 
 Afterwards, if you want to write a full document, you can set the template. You do not have to if you only wanted the stats block.
