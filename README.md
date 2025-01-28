@@ -4,10 +4,16 @@ A typst template for writing pathfinder 2nd edition documents
 
 ## Usage
 
-Starts with importing the package
+Starts with dropping the package's folder in your project's directory and importing the package
 
+<!--
 ```typst
 #import "@preview/pf2e:1.0.0" : *
+```
+-->
+
+```typst
+#import "pf2e/lib.typ": *
 ```
 
 Afterwards, if you want to write a full document, you can set the template. You do not have to if you only wanted the stats block.
