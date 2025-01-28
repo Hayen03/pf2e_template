@@ -148,7 +148,16 @@ Objects and make functions separates the data of a stat block such as an item or
 
 They allow a uniform format across all statblocks and better control of the data, such as filtering and sorting.
 
-There is multiple type of objects included in this module and each is associated with its own _make function_, which takes the data and creates the statblock.
+There is multiple type of objects included in this module and each are created with a _new_ function and is associated with its own _make function_, which takes the data and creates the statblock.
+
+There is a generic make function, `mk()`, which takes the object and call the appropriate make function. 
+
+All make function take these four parameters:
+
+- `object`: the object to make the stats block for. Mandatory.
+- `breakable`: `bool`, wether the resulting stats block can be broken across pages.
+- `short`: `array` or `bool`, a list of attacks, abilities, activations and other entries that will be shown in short form. If given the value `true`, every entry will be in short form. Default `()`. (Currently only implemented for activations and abilities)
+- `hide`: `array`, similar to `short`, but the entries in this list will not be shown in the stat block. Default `()`. (Currently not implemented)
 
 ### Items
 
