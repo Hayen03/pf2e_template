@@ -1,10 +1,11 @@
 #import "../base.typ": *
 #import "common.typ": *
+#import "item.typ": class_activation, mk_activation 
 
 #let class_hazard = "hazard"
 
 #let new_hazard(name, level: none, traits: (), stealth: none, description: none, disable: none, ac: none, hardness: none, activations: (), action: none, routine: none, reset: none, others: (:), tags: (), notes: (:), hp: none, saves: (:), immunities: (), weaknesses: (:), resistances: (:), kind: "Hazard", short: false, breakable: false) = (
-  class: "Hazard",
+  class: class_hazard,
   name: name,
   kind: kind,
   level: level,
