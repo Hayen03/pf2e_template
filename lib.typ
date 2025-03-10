@@ -82,7 +82,7 @@
   authors: (),
 ) = {}
 
-#let pf2e(body, columns: 1, theme: THEME, title: none, subtitle: none, authors: (), content_table: false, title_page: false, mk_reg: DEFAULT_MK_REGISTRY) = {
+#let pf2e(body, columns: 1, theme: THEME, title: none, subtitle: none, authors: (), content_table: false, title_page: none, mk_reg: DEFAULT_MK_REGISTRY) = {
   set page(
     paper: "us-letter",
     columns: columns,
@@ -171,8 +171,20 @@
   show ":r:": r
   show ":f:": f
 
-  if exists(title) and title_page {
-    title_page
+  if exists(title_page) {
+    if type(title_page) == bool and title_page {
+      // faire la page de titre automatiquement
+      [TODO!!!]
+      pagebreak()
+    } else if type(title_page) == content {
+      title_page
+      pagebreak()
+    } else if type(title_page) == function {
+      title_page()
+      pagebreak()
+    } else {
+
+    }
   }
   if content_table {
     set page(columns: 2)

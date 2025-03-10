@@ -3,10 +3,11 @@
 
 #show: it => pf2e(
   it,
-  title: "",
+  title: "PF2E Typst Template",
   subtitle: "",
   authors: (),
   columns: 1,
+  title_page: false,
 )
 
 #banner[= PF2E Template]
