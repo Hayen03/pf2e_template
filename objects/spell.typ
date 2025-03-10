@@ -19,7 +19,7 @@
   ritual: "Ritual",
 )
 
-#let new_spell(name, body, actions: none, traditions: (), rank: none, traits: (), range: none, target: none, area: none, duration: none, save: none, locus: none, cost: none, prerequisites: none, trigger: none, requirements: none, short: none, spell_lists: (), defense: none, kind: "Spell", others: (:), heightened: (:), breakable: false, tags: ()) = (
+#let new_spell(name, body, actions: none, traditions: (), rank: none, traits: (), range: none, target: none, area: none, duration: none, save: none, locus: none, cost: none, prerequisites: none, trigger: none, requirements: none, short: none, spell_lists: (), defense: none, kind: "Spell", others: (:), heightened: (:), breakable: false, tags: (), url: none) = (
   class: class_spell,
   name: name,
   body: body,
@@ -45,6 +45,7 @@
   heightened: heightened,
   breakable: breakable,
   tags: clean_list(split_traits(tags)),
+  url: url,
 )
 #let mk_spell(spell, theme: THEME, breakable: auto, short: (), hide: ()) = {
   let tradition = {
@@ -68,6 +69,7 @@
     breakable: if breakable == auto {spell.breakable} else {breakable},
     theme: theme,
     hanging: true,
+    url: spell.url,
   )[
     #let body = ()
     #if exists(spell.prerequisites){body.push[*Prerequisites* #spell.prerequisites]}
@@ -114,14 +116,14 @@
   type: type,
   focus: focus,
 )
-#let spell_use(name, uses: none) = ("name": name, "uses": uses)
+#let spell_use(name, uses: none, url: none) = ("name": name, "uses": uses, url: url)
 #let new_spell_list(..spells, slots: none, rank: 0, notes: (:), heightened: none) = {
   let new_spells = (:)
   for spell in spells.pos() {
-    let s = if type(spell) == str {
+    let s = if type(spell) == str or type(spell) == content {
       spell_use(spell, uses: 1)
     } else if type(spell) == array {
-      spell_use(spell.at(0), spell.at(1))
+      spell_use(spell.at(0), uses: if spell.len() > 1 {spell.at(1)} else {none}, url: if spell.len() > 2 {spell.at(2)} else {none})
     } else {
       spell
     }
@@ -140,7 +142,7 @@
     heightened: heightened,
   )
 }
-#let mk_spell_use(spell_use, note: none) = [_#spell_use.name;_#if exists(note) [ (#note)]#if spell_use.uses != none and spell_use.uses > 1 [(#spell_use.uses/day)]]
+#let mk_spell_use(spell_use, note: none) = [_#if exists(spell_use.url) {link(spell_use.url, spell_use.name)} else {spell_use.name};_#if exists(note) [ (#note)]#if spell_use.uses != none and spell_use.uses > 1 [(#spell_use.uses/day)]]
 #let mk_spell_list(spell_list, heightened: auto, theme: THEME, breakable: auto, short: (), hide: ()) = {
   let h = if heightened == auto and spell_list.heightened == auto {none} else if spell_list.heightened == auto {heightened} else if heightened == auto {spell_list.heightened} else if exists(spell_list.heightened) {spell_list.heightened} else {heightened}
   let rank = if (spell_list.rank == 0) [*Cantrip #if h != none [(#convert_rank(h))]*] else [*#convert_rank(spell_list.rank)*]

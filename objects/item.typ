@@ -14,7 +14,7 @@
   "true": "True",
 )
 
-#let new_item(name, body, price: none, bulk: none, usage: none, activate: none, level: none, traits: (), variants: (), dc: none, short: none, variant: none, kind: "Item", plus: false, requirements: none, activations: (), others: (:), hardness: none, hp: none, notes: (:), breakable: false, tags:(), after: none, craft_requirements: none, runes: (), spell_lists: ()) = (
+#let new_item(name, body, price: none, bulk: none, usage: none, activate: none, level: none, traits: (), variants: (), dc: none, short: none, variant: none, kind: "Item", plus: false, requirements: none, activations: (), others: (:), hardness: none, hp: none, notes: (:), breakable: false, tags:(), after: none, craft_requirements: none, runes: (), spell_lists: (), url: none) = (
   class: class_item,
   variant: variant,
   name: name,
@@ -42,8 +42,9 @@
   craft_requirements: craft_requirements,
   runes: clean_list(split_traits(runes)),
   spell_lists: spell_lists,
+  url: url,
 )
-#let new_activation(name: none, actions: a, traits: (), frequency: none, requirements: none, trigger: none, prerequisites: none, duration: none, body, notes: (:), tags:()) = (
+#let new_activation(name: none, actions: a, traits: (), frequency: none, requirements: none, trigger: none, prerequisites: none, duration: none, body, notes: (:), tags:(), url: none) = (
   class: class_activation,
   name: name,
   actions: actions,
@@ -56,8 +57,9 @@
   duration: duration,
   notes: notes,
   tags: clean_list(split_traits(tags)),
+  url: url,
 )
-#let new_variant(name, body, dc:none, price: none, bulk: none, usage:none, level:none, short: none, hardness: none, hp: none, others: (:), notes: (:), tags: (), craft_requirements: none, ac: none) = (
+#let new_variant(name, body, dc:none, price: none, bulk: none, usage:none, level:none, short: none, hardness: none, hp: none, others: (:), notes: (:), tags: (), craft_requirements: none, ac: none, url: none) = (
   class: class_variant,
   name: name,
   body: body,
@@ -74,12 +76,13 @@
   tags: clean_list(split_traits(tags)),
   craft_requirements: craft_requirements,
   ac: ac,
+  url: url,
 )
 #let mk_activation(activation, theme: THEME, breakable: auto, short: false, hide: false) = {
   let name = [Activation#if exists(activation.name) [---#activation.name]]
   let pre = (activation.actions,)
   if exists(activation.traits) {pre.push[(#activation.traits.join(", "))]}
-  if short == true [*#name* #pre.filter(it => exists(it)).join(" ")]
+  if short == true [*#if exists(activation.url) {link(activation.url, name)} else {name}* #pre.filter(it => exists(it)).join(" ")]
   else {
     let body = ()
     if exists(activation.prerequisites) {body.push([ *Prerequisites* #activation.prerequisites])}
@@ -97,7 +100,7 @@
   [
     #let bloc = ()
     #bloc.push((
-      if not exists(variant.name) {none} else if type(variant.name) == int [*Rank* #convert_rank(variant.name)] else [*#if variant.name in item_grades.values() [Grade] else [Type]* #variant.name], 
+      if not exists(variant.name) {none} else if type(variant.name) == int [*Rank* #convert_rank(if exists(url) {link(url, variant.name)} else {variant.name})] else [*#if variant.name in item_grades.values() [Grade] else [Type]* #if exists(url) {link(url, variant.name)} else {variant.name}], 
       if not exists(variant.bulk) {none} else [*Bulk* #convert_bulk(variant.bulk)#if "bulk" in variant.notes [ (#variant.notes.bulk)]],
       if not exists(variant.price) {none} else [*Price* #convert_price(variant.price)#if "price" in variant.notes [ (#variant.notes.price)]],
       if not exists(variant.level) {none} else [*Level* #convert_data(variant.level)#if "level" in variant.notes [ (#variant.notes.level)]],
@@ -126,6 +129,7 @@
     breakable: if breakable == auto {item.breakable} else {breakable},
     theme: theme,
     hanging: true,
+    url: item.url,
   )[
     #let bloc = ()
     #if exists(item.price) {bloc.push[*Price* #convert_price(item.price)#if "price" in item.notes [ (#item.notes.price)]]}

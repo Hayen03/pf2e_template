@@ -20,7 +20,7 @@
   huge: "huge",
   gargantuan: "gargantuan",
 )
-#let new_creature(name, level: none, traits: (), perception: 0, senses: (), skills: (:), strength: 0, dexterity: 0, constitution: 0, intelligence: 0, wisdom: 0, charisma: 0, ac: 10, fortitude: 0, reflex: 0, will: 0, hp: 0, resistances: (:), weaknesses: (:), immunities: (), speed: (:), abilities: (), attacks: (), dc: none, description, short: none, size: none, spellcastings: (), notes: (:), languages: none, others: (:), tags: (), family: none, items:(), hardness: none, kind: "Creature", breakable: false) = {
+#let new_creature(name, level: none, traits: (), perception: 0, senses: (), skills: (:), strength: 0, dexterity: 0, constitution: 0, intelligence: 0, wisdom: 0, charisma: 0, ac: 10, fortitude: 0, reflex: 0, will: 0, hp: 0, resistances: (:), weaknesses: (:), immunities: (), speed: (:), abilities: (), attacks: (), dc: none, description, short: none, size: none, spellcastings: (), notes: (:), languages: none, others: (:), tags: (), family: none, items:(), hardness: none, kind: "Creature", breakable: false, link: none) = {
   (
     class: class_creature,
     name: name,
@@ -59,9 +59,10 @@
     hardness: hardness,
     kind: kind,
     breakable: breakable,
+    link: link,
   )
 }
-#let new_ability(name, body, actions: none, traits: (), trigger: none, requirements: none, prerequisites: none, category: ability_category.general, duration: none, others: (:), tags: (), frequency: none, range: none, targets: none, area: none, defense: none, short: false) = {
+#let new_ability(name, body, actions: none, traits: (), trigger: none, requirements: none, prerequisites: none, category: ability_category.general, duration: none, others: (:), tags: (), frequency: none, range: none, targets: none, area: none, defense: none, short: false, url: none) = {
   (
     class: class_ability,
     name: name,
@@ -81,10 +82,11 @@
     area: area,
     defense: defense,
     short: short,
+    url: url,
   )
 }
 #let mk_ability(ability, short: auto, breakable: auto, hide: (), theme: THEME) = {
-  let name = [#{ability.name} #ability.actions]
+  let name = [#if exists(ability.url) {link(ability.url, ability.name)} else {ability.name} #ability.actions]
   let pre = ()
   short = if short == auto {ability.short} else {short}
   let traits = list_traits(ability.traits)
@@ -106,7 +108,7 @@
   } 
   [*#name* #pre.join(" ")]
 }
-#let new_attack(name, damage, traits: (), bonus: 0, type: Weapon.types.melee, actions: a, tags:()) = (
+#let new_attack(name, damage, traits: (), bonus: 0, type: Weapon.types.melee, actions: a, tags:(), url: none) = (
   class: class_attack,
   name: name,
   type: type,
@@ -115,12 +117,13 @@
   traits: clean_list(split_traits(traits)),
   damage: damage,
   tags: clean_list(split_traits(tags)),
+  url: url,
 )
 #let mk_attack(attack, theme: THEME, breakable: auto, short: false, hide: ()) = {
   let line = (
     if exists(attack.type) [*#attack.type*],
     if exists(attack.actions) [#attack.actions],
-    if exists(attack.name) [#lower(attack.name)],
+    if exists(attack.name) [#if exists(attack.url) {link(attack.url, lower(attack.name))} else {lower(attack.name)}],
     if exists(attack.bonus) [#convert_modifier(attack.bonus)],
     if exists(attack.traits) [(#list_traits(attack.traits))],
     if exists(attack.damage) [*Damage* #{attack.damage}],
@@ -137,6 +140,7 @@
     breakable: if breakable == auto {creature.breakable} else {breakable},
     theme: theme,
     hanging: true,
+    url: creature.url,
   )[
     #let short = if type(short) == array {short.map(it => lower(it))} else if type(short) == str or type(str) == content {lower(short)} else {()}
     #let bloc = ()

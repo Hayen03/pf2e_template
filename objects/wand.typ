@@ -6,7 +6,7 @@
 #let class_wand = "wand"
 
 #let wand_cast_spell_activation = new_activation(actions: "Cast a Spell", frequency: "once per day, plus overcharge")[You cast one of the spell from the wand.]
-#let new_wand(name, body, price: none, bulk: L, usage: [held in 1 hand], activate: [cast a spell], level: none, traits: (), variants: (), dc: none, short: none, variant: none, kind: "Item", plus: false, requirements: none, activations: (), others: (:), hardness: none, hp: none, notes: (:), breakable: false, tags:(), after: none, craft_requirements: [a casting of each spell], spell_lists: (), runes: ()) = (
+#let new_wand(name, body, price: none, bulk: L, usage: [held in 1 hand], activate: [cast a spell], level: none, traits: (), variants: (), dc: none, short: none, variant: none, kind: "Item", plus: false, requirements: none, activations: (), others: (:), hardness: none, hp: none, notes: (:), breakable: false, tags:(), after: none, craft_requirements: [a casting of each spell], spell_lists: (), runes: (), url: none) = (
   class: class_wand,
   variant: variant,
   name: name,
@@ -34,6 +34,7 @@
   craft_requirements: craft_requirements,
   spell_lists: as_list(spell_lists),
   runes: clean_list(split_traits(runes)),
+  url: url,
 )
 #let mk_wand(item, theme: THEME, breakable: auto, short: (), hide: ()) = {
   itembox(
@@ -44,6 +45,7 @@
     breakable: if breakable == auto {item.breakable} else {breakable},
     theme: theme,
     hanging: true,
+    url: wand.url,
   )[
     #let bloc = ()
     #if exists(item.price) {bloc.push[*Price* #convert_price(item.price)#if "price" in item.notes [ (#item.notes.price)]]}

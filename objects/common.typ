@@ -132,7 +132,7 @@
   piercing: "piercing",
 )
 
-#let mk_itembox(name: none, body, actions: none, kind: none, level: none, traits: (), breakable, theme: THEME) = {
+#let mk_itembox(name: none, body, actions: none, kind: none, level: none, traits: (), breakable, theme: THEME, url: none) = {
   itembox(
     name, 
     actions: actions, 
@@ -142,6 +142,7 @@
     breakable: breakable, 
     theme: theme, 
     hanging: true,
+    url: url,
   )[
     #let body = as_list(body)
     #body.map(lines => {

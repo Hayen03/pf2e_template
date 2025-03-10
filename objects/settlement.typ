@@ -3,7 +3,7 @@
 
 #let class_settlement = "settlement"
 
-#let new_settlement(name, tags: (), traits: (), level: none, kind: "Settlement", government: none, population: none, languages: none, religions: none, threats: none, npcs: (:), others: (:), description: none, breakable: false,) = (
+#let new_settlement(name, tags: (), traits: (), level: none, kind: "Settlement", government: none, population: none, languages: none, religions: none, threats: none, npcs: (:), others: (:), description: none, breakable: false, url: none) = (
   class: class_settlement,
   name: name,
   kind: kind,
@@ -19,6 +19,7 @@
   others: others,
   description: description,
   breakable: breakable,
+  url: url,
 )
 #let mk_settlement(settlement, theme: THEME, short: false, hide: (), breakable: auto) = {
   itembox(
@@ -29,6 +30,7 @@
     breakable: if breakable == auto {settlement.breakable} else {breakable},
     theme: theme,
     hanging: true,
+    url: settlement.url,
   )[
     #let bloc = ()
     #bloc.push(straight(settlement.description))

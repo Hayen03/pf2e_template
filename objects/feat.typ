@@ -3,7 +3,7 @@
 
 #let class_feat = "feat"
 
-#let new_feat(name, body, traits: (), actions: none, kind: "Feat", level: none, prerequisites: none, trigger: none, requirements: none, short: none, frequency: none, others: (:), breakable: false, tags: (), special: none) = (
+#let new_feat(name, body, traits: (), actions: none, kind: "Feat", level: none, prerequisites: none, trigger: none, requirements: none, short: none, frequency: none, others: (:), breakable: false, tags: (), special: none, url: none) = (
   class: class_feat,
   name: name,
   body: body,
@@ -20,6 +20,7 @@
   breakable: breakable,
   tags: clean_list(split_traits(tags)),
   special: special,
+  url: url,
 )
 #let mk_feat(feat, theme: THEME, breakable: auto, short: (), hide: ()) = {
   itembox(
@@ -31,6 +32,7 @@
     breakable: if breakable == auto {feat.breakable} else {breakable},
     theme: theme,
     hanging: true,
+    url: feat.url,
   )[
     #let bloc = ()
     #if exists(feat.prerequisites) {bloc.push[*Prerequisites* #feat.prerequisites]}

@@ -6,7 +6,7 @@
 #let class_staff = "staff"
 
 #let staff_cast_spell_activation = new_activation(name:"Cast a Spell", actions: none)[You expend a number of charges from the staff to cast a spell from its list.]
-#let new_staff(name, body, price: none, bulk: 1, usage: [held in 1 hand], activate: [cast a spell], level: none, traits: (), variants: (), dc: none, short: none, variant: none, kind: "Item", plus: false, requirements: none, activations: (), others: (:), hardness: none, hp: none, notes: (:), breakable: false, tags:(), after: none, craft_requirements: [a casting of each spell], spell_lists: (), runes: ()) = (
+#let new_staff(name, body, price: none, bulk: 1, usage: [held in 1 hand], activate: [cast a spell], level: none, traits: (), variants: (), dc: none, short: none, variant: none, kind: "Item", plus: false, requirements: none, activations: (), others: (:), hardness: none, hp: none, notes: (:), breakable: false, tags:(), after: none, craft_requirements: [a casting of each spell], spell_lists: (), runes: (), url: none) = (
   class: class_staff,
   variant: variant,
   name: name,
@@ -34,6 +34,7 @@
   craft_requirements: craft_requirements,
   spell_lists: as_list(spell_lists),
   runes: clean_list(split_traits(runes)),
+  url: none,
 )
 #let mk_staff(item, theme: THEME, breakable: auto, short: (), hide: ()) = {
   itembox(
@@ -44,6 +45,7 @@
     breakable: if breakable == auto {item.breakable} else {breakable},
     theme: theme,
     hanging: true,
+    url: staff.url,
   )[
     #let bloc = ()
     #if exists(item.price) {bloc.push[*Price* #convert_price(item.price)#if "price" in item.notes [ (#item.notes.price)]]}

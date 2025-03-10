@@ -113,7 +113,7 @@
   .join()
 }
 
-#let itembox(name, body, actions: none, kind: none, level: none, traits: none, size: 100%, breakable: false, theme: THEME, hanging: false) = block(width: size, inset: (y: 0.3em), above: 1.2em, breakable: breakable,
+#let itembox(name, body, actions: none, kind: none, level: none, traits: none, size: 100%, breakable: false, theme: THEME, hanging: false, url: none) = block(width: size, inset: (y: 0.3em), above: 1.2em, breakable: breakable,
   // heading
   {
     set par(
@@ -145,7 +145,7 @@
         heading(
           depth: 1, 
           bookmarked: false, 
-          outlined: false)[#name #actions],
+          outlined: false)[#if exists(url) {link(url, name)} else {name} #actions],
         [],
         heading( 
           depth: 1, 

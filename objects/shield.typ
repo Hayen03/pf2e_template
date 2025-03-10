@@ -4,7 +4,7 @@
 
 #let class_shield = "shield"
 
-#let new_shield(name, body, traits: (), price: none, ac_bonus: none, speed_penalty: none, bulk: none, hardness: none, hp: none, level: none, short: none, others: (:), activations: (), plus: false, variants: (), breakable: false, tags: (), after: none, craft_requirements: none, runes: (), spell_lists: ()) = (
+#let new_shield(name, body, traits: (), price: none, ac_bonus: none, speed_penalty: none, bulk: none, hardness: none, hp: none, level: none, short: none, others: (:), activations: (), plus: false, variants: (), breakable: false, tags: (), after: none, craft_requirements: none, runes: (), spell_lists: (), url: none) = (
   class: class_shield,
   name: name,
   body: body,
@@ -28,6 +28,7 @@
   craft_requirements: craft_requirements,
   runes: clean_list(split_traits(runes)),
   spell_lists: spell_lists,
+  url: url,
 )
 #let mk_shield(shield, theme: THEME, breakable: auto, short: (), hide: ()) = {
   itembox(
@@ -38,6 +39,7 @@
     breakable: if breakable == auto {shield.breakable} else {breakable},
     theme: theme,
     hanging: true,
+    url: shield.url,
   )[
     #let body = ()
     #if exists(shield.price) {body.push[*Price* #convert_price(shield.price)]}

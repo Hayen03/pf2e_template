@@ -4,7 +4,7 @@
 
 #let class_hazard = "hazard"
 
-#let new_hazard(name, level: none, traits: (), stealth: none, description: none, disable: none, ac: none, hardness: none, activations: (), action: none, routine: none, reset: none, others: (:), tags: (), notes: (:), hp: none, saves: (:), immunities: (), weaknesses: (:), resistances: (:), kind: "Hazard", short: false, breakable: false) = (
+#let new_hazard(name, level: none, traits: (), stealth: none, description: none, disable: none, ac: none, hardness: none, activations: (), action: none, routine: none, reset: none, others: (:), tags: (), notes: (:), hp: none, saves: (:), immunities: (), weaknesses: (:), resistances: (:), kind: "Hazard", short: false, breakable: false, url: none) = (
   class: class_hazard,
   name: name,
   kind: kind,
@@ -29,6 +29,7 @@
   notes: notes,
   short: short,
   breakable: breakable,
+  url: url,
 )
 #let mk_hazard(hazard, theme: THEME, short: auto, breakable: auto, hide: ()) = itembox(
     hazard.name,
@@ -38,6 +39,7 @@
     breakable: if breakable == auto {hazard.breakable} else {breakable},
     theme: theme,
     hanging: true,
+    url: hazard.url,
   )[
     #let blocs = ()
     #let bloc = ()

@@ -37,7 +37,7 @@
   piercing: "P",
   bludgeoning: "B",
 )
-#let new_weapon(name, body, damage: none, bulk: none, hands: none, range: none, reload: none, type: none, category: none, group: none, ammo: none, traits: (), level: none, price: none, ammo_price: none, ammo_bulk: none, short: none, damage_type: none, base: none, hardness: none, hp: none, others: (:), dc: none, activations: (), plus: false, variants: (), notes: (:), breakable: false, tags: (), after: none, kind: "Item", craft_requirements: none, n_dice: 1, atk_bonus: none, runes: (), spell_lists: ()) = (
+#let new_weapon(name, body, damage: none, bulk: none, hands: none, range: none, reload: none, type: none, category: none, group: none, ammo: none, traits: (), level: none, price: none, ammo_price: none, ammo_bulk: none, short: none, damage_type: none, base: none, hardness: none, hp: none, others: (:), dc: none, activations: (), plus: false, variants: (), notes: (:), breakable: false, tags: (), after: none, kind: "Item", craft_requirements: none, n_dice: 1, atk_bonus: none, runes: (), spell_lists: (), url: none) = (
   class: class_weapon,
   name: name,
   body: body,
@@ -75,6 +75,7 @@
   atk_bonus: atk_bonus,
   runes: clean_list(split_traits(runes)),
   spell_lists: spell_lists,
+  url: url,
 )
 #let mk_weapon(weapon, theme: THEME, breakable: auto, short: (), hide: ()) = {
   itembox(
@@ -85,6 +86,7 @@
     breakable: if breakable == auto {weapon.breakable} else {breakable},
     theme: theme,
     hanging: true,
+    url: weapon.url,
   )[
     #let bloc = ()
     #bloc.push((

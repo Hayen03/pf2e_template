@@ -3,7 +3,7 @@
 
 #let class_background = "background"
 
-#let new_background(name, body, traits: (), short: none, tags: (), breakable: false, kind: "Background") = (
+#let new_background(name, body, traits: (), short: none, tags: (), breakable: false, kind: "Background", url: none) = (
   class: class_background,
   name: name,
   body: body,
@@ -12,9 +12,18 @@
   tags: clean_list(split_traits(tags)),
   breakable: breakable,
   kind: kind,
+  url: url,
 )
 #let mk_background(background, theme: THEME, breakable: auto, short: (), hide: ()) = {
-  itembox(background.name, background.body, traits: background.traits, kind: background.kind, theme: theme, breakable: if breakable == auto {background.breakable} else {breakable},)
+  itembox(
+    background.name, 
+    background.body, 
+    traits: background.traits, 
+    kind: background.kind, 
+    theme: theme, 
+    breakable: if breakable == auto {background.breakable} else {breakable}, 
+    url: background.url,
+  )
 }
 
 #let Background = (

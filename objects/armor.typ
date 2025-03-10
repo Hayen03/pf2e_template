@@ -19,7 +19,7 @@
   medium: "Medium",
   heavy: "Heavy",
 )
-#let new_armor(name, body, price: none, ac_bonus: none, dex_cap: none, check_penalty: none, speed_penalty: none, bulk: none, group: none, traits: (), short: none, level: none, proficiency: none, strength: none, hardness: none, hp: none, others: (:), activations: (), plus: false, variants: (), breakable: false, tags: (), after: none, kind: "Item", craft_requirements: none, save_bonus: none, runes: (), spell_lists: ()) = (
+#let new_armor(name, body, price: none, ac_bonus: none, dex_cap: none, check_penalty: none, speed_penalty: none, bulk: none, group: none, traits: (), short: none, level: none, proficiency: none, strength: none, hardness: none, hp: none, others: (:), activations: (), plus: false, variants: (), breakable: false, tags: (), after: none, kind: "Item", craft_requirements: none, save_bonus: none, runes: (), spell_lists: (), url: none) = (
   name: name,
   body: body,
   price: price,
@@ -49,6 +49,7 @@
   save_bonus: save_bonus,
   runes: clean_list(split_traits(runes)),
   spell_lists: spell_lists,
+  url: url,
 )
 #let mk_armor(armor, theme: THEME, breakable: auto, short: (), hide: (), ) = {
   itembox(
@@ -59,6 +60,7 @@
     breakable: if breakable == auto {armor.breakable} else {breakable},
     theme: theme,
     hanging: true,
+    url: armor.url,
   )[
     #let body = ()
     #if armor.price != none {body.push[*Price* #convert_price(armor.price)]}

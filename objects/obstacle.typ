@@ -3,7 +3,7 @@
 
 #let class_obstacle = "obstacle"
 
-#let new_obstacle(name, level: none, kind: "Obstacle", traits: (), tags: (), vp: none, vp_title: "VP", overcome: none, body, others: (:), breakable: false) = (
+#let new_obstacle(name, level: none, kind: "Obstacle", traits: (), tags: (), vp: none, vp_title: "VP", overcome: none, body, others: (:), breakable: false, url: none) = (
   class: class_obstacle,
   name: name,
   level: level, 
@@ -16,6 +16,7 @@
   body: body,
   others: others,
   breakable: breakable,
+  url: url,
 )
 #let mk_obstacle(obstacle, theme: THEME, short: false, breakable: auto, hide: ()) = {
   itembox(
@@ -26,6 +27,7 @@
     breakable: if breakable == auto {obstacle.breakable} else {breakable},
     theme: theme,
     hanging: true,
+    url: obstacle.url,
   )[
     #let bloc = ()
     #let line = (
