@@ -117,14 +117,15 @@
   tags: clean_list(split_traits(tags)),
 )
 #let mk_attack(attack, theme: THEME, breakable: auto, short: false, hide: ()) = {
-  let line = ()
-  let name = if attack.type != none [#{attack.type} #attack.actions] else {none}
-  //if attack.actions != none {line.push(attack.actions)}
-  if attack.name != none {line.push(lower(attack.name))}
-  if attack.bonus != none {line.push(convert_modifier(attack.bonus))}
-  let traits = list_traits(attack.traits)
-  if traits != none {line.push([(#{traits})])}
-  if attack.damage != none {line.push([*Damage* #{attack.damage}])}
+  let line = (
+    if exists(attack.type) [*#attack.type*],
+    if exists(attack.actions) [#attack.actions],
+    if exists(attack.name) [#lower(attack.name)],
+    if exists(attack.bonus) [#convert_modifier(attack.bonus)],
+    if exists(attack.traits) [(#list_traits(attack.traits))],
+    if exists(attack.damage) [*Damage* #{attack.damage}],
+  )
+  return [#line.filter(it => exists(it)).join(" ")]
 }
 
 #let mk_creature(creature, short: auto, breakable: auto, theme: THEME, hide: ()) = {
