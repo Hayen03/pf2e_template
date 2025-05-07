@@ -193,6 +193,10 @@ Items are for all sorts of mundane and magical items. Can be created with `new_i
 - `spell_lists`: `array`, list of spell_list objects. Used for items that can cast spell like staves. Shown after activations in a different block. Default `()`.
 - `after`: `str` or `content`, block of text shown after `spell_lists` in a different block. Default `none`.
 - `variants`: `array`, list of variant objects for this item. Shown at the end, each in a different block. Default `()`.
+- `runes`: `array`, list of runes on this object
+- `url`: `str`, a link or url to other ressources
+- `extra`: `dict`, dictionary of extra data on this object
+- `image`: `content`, image for this object
 
 ### Activations
 
@@ -238,6 +242,10 @@ Armors are a type of items, and as such they can take all of the parameter of it
 - `proficiency`: `str` or `content`, the armor's proficiency group. The `Armor.proficiencies` enumeration can be used. Default `none`.
 - `strength`: `int`, the minimal strength required to reduce the armor's penalty. Default `none`.
 - `save_bonus`: `int`, the armor's bonus to all saving throw, if any. Most likely due to a Resilient rune. Default `none`.
+- `runes`: `array`, list of runes on this object
+- `url`: `str`, a link or url to other ressources
+- `extra`: `dict`, dictionary of extra data on this object
+- `image`: `content`, image for this object
 
 ### Shields
 
@@ -245,6 +253,9 @@ Shields are a type of items, and as such they can take all of the parameter of i
 
 - `ac_bonus`: `int`. Default `none`.
 - `speed_penalty`: `int`. Default `none`.
+- `url`: `str`, a link or url to other ressources
+- `extra`: `dict`, dictionary of extra data on this object
+- `image`: `content`, image for this object
 
 ### Staves and Wands
 
@@ -267,6 +278,9 @@ Weapons are a type of items, and as such they can take all of the parameter of i
 - `ammo`: `str` or `content`, the type of ammunition the weapon uses, if any. Default `none`.
 - `ammo_price`: `number`, the price of an ammunition for this weapon. Default `none`.
 - `ammo_bulk`: `int` or `L`, the bulk of an ammunition for this weapon. Default `none`.
+- `url`: `str`, a link or url to other ressources
+- `extra`: `dict`, dictionary of extra data on this object
+- `image`: `content`, image for this object
 
 ### Feats
 
@@ -285,6 +299,9 @@ Feats can be created with the `new_feat()` function and its associated make func
 - `frequency`: `str` or `content`, the frequency at which this feat can be used, if any. Default `none`.
 - `others`: `dict`, dictionary of other entry to add in the upper part of the feat's description. Format is `(EntryName: entry_value)`. Default `(:)`.
 - `special`: `str` or `content`, special entry at the end of the feat's description. Default `none`.
+- `url`: `str`, a link or url to other ressources
+- `extra`: `dict`, dictionary of extra data on this object
+- `image`: `content`, image for this object
 
 ### Spells
 
@@ -311,6 +328,9 @@ Spells can be created with the `new_spell()` function and its associated make fu
 - `spell_lists`: `array`, list of other spell lists, such as class specific, that have access to this spell. Default `()`.
 - `others`: `dict`, dictionary of other entry to add in the upper part of the spell's description. Format is `(EntryName: entry_value)`. Default `(:)`.
 - `heightened`: `dict`, dictionary containing the information of the heightened spell for the entries after the description. Format is `("rank or +n": content)`. Default `(:)`.
+- `url`: `str`, a link or url to other ressources
+- `extra`: `dict`, dictionary of extra data on this object
+- `image`: `content`, image for this object
 
 ### Creatures
 
@@ -351,6 +371,10 @@ Creatures can be created with the `new_creature()` function and its associated m
 - `dc`: `int`, common DC for the creature's ability. Default `none`.
 - `others`: `dict`, dictionary of other entry to add in the general section of the statsblock. Format is `(EntryName: entry_value)`. Default `(:)`.
 - `notes`: `dict`, notes for this creature's properties. You can give notes to a specific resistance, weakness, immunity or speed by giving a dictionary using the resistance, weakness, immunity or speed name as the key. Ex: `notes: (resistances: (slashing: [Except from adamantine]))`. Default `(:)`.
+- `url`: `str`, a link or url to other ressources
+- `extra`: `dict`, dictionary of extra data on this object
+- `image`: `content`, image for this object
+- `feats`: `array`, list of extra feats this creature has
 
 ### Attacks
 
@@ -363,6 +387,9 @@ Attack objects represent a creature's basic Strikes. They can be created with th
 - `type`: `str`, the weapon type, either melee or ranged, of the attack. The `Weapon.types` enumeration can be used. Default `"Melee"`.
 - `actions`: `content`, the actions it takes to use this attack. Default `a`.
 - `tags`: `str` or `array`, list of tags. Tags are not shown but can be used to sort and catergorise statblocks. Default `()`.
+- `url`: `str`, a link or url to other ressources
+- `extra`: `dict`, dictionary of extra data on this object
+- `image`: `content`, image for this object
 
 ### Abilities
 
@@ -384,6 +411,9 @@ Ability objects represent a creature's special abilities. They can be created wi
 - `area`: `str` or `content`, the area of the ability, if any. Default `none`.
 - `frequency`: `str` or `content`, the frequency at which the ability can be used, if any. Default `none`.
 - `others`: `dict`, dictionary of other entry to add before the ability's effect. Format is `(EntryName: entry_value)`. Default `(:)`.
+- `url`: `str`, a link or url to other ressources
+- `extra`: `dict`, dictionary of extra data on this object
+- `image`: `content`, image for this object
 
 ### Spellcasting
 
@@ -395,6 +425,9 @@ Ability objects represent a creature's ability to cast spells. They can be creat
 - `dc`: `int`, the spellcasting DC. The spellcasting modifier is automatically calculated. Default `10`.
 - `focus`: `int`, the amount of focus point available for this spellcasting. Default `none`.
 - `spell_lists`: `array`, list of spell list objects. Default `()`.
+- `url`: `str`, a link or url to other ressources
+- `extra`: `dict`, dictionary of extra data on this object
+- `image`: `content`, image for this object
 
 ### Spell List
 
@@ -405,6 +438,9 @@ A spell list object is just a collection of spells at a certain rank. They can b
 - `heightened`: `int`, for cantrip, the rank at which they are heightened. Will calculate automatically based on the creature's level if set to `auto`. Default `auto`.
 - `notes`: `dict`, notes for specific spells. Default `(:)`.
 - `..spells`: `array`, list of spell name.
+- `url`: `str`, a link or url to other ressources
+- `extra`: `dict`, dictionary of extra data on this object
+- `image`: `content`, image for this object
 
 ### Hazards
 
@@ -431,6 +467,9 @@ Hazards can be created with the `new_hazard()` function and its associated make 
 - `activations`: `array`, list of actions the hazard can take. Each action takes the form of an activation object. Default `()`.
 - `others`: `dict`, dictionary of other entry to add in the upper part of the hazard's description. Format is `(EntryName: entry_value)`. Default `(:)`
 - `notes`: `dict`, notes for the hazard entries. Default `(:)`
+- `url`: `str`, a link or url to other ressources
+- `extra`: `dict`, dictionary of extra data on this object
+- `image`: `content`, image for this object
 
 ### Backgrounds
 
@@ -442,6 +481,9 @@ Backgrounds can be created with the `new_background()` function and its associat
 - `kind`: `str` or `content`, the kind of statblock. Default `"Background"`.
 - `traits`: `str` or `array`, the traits of the background. Default `()`.
 - `tags`: `str` or `array`, list of tags. Tags are not shown but can be used to sort and catergorise statblocks. Default `()`.
+- `url`: `str`, a link or url to other ressources
+- `extra`: `dict`, dictionary of extra data on this object
+- `image`: `content`, image for this object
 
 ### Heritages
 
@@ -452,6 +494,9 @@ Heritages can be created with the `new_heritage()` function and its associated m
 - `traits`: `str` or `array`, the traits of the heritage. Default `()`.
 - `tags`: `str` or `array`, list of tags. Tags are not shown but can be used to sort and catergorise statblocks. Default `()`.
 - `addons`: `array`, list of additional components that are associated with the heritage but do not need to be on the same page, like actions. Default `()`.
+- `url`: `str`, a link or url to other ressources
+- `extra`: `dict`, dictionary of extra data on this object
+- `image`: `content`, image for this object
 
 ### Obstacles
 
@@ -467,6 +512,9 @@ Obstacles can be created with the `new_obstacle()` function and its associated m
 - `vp_title`: `content`, changes the name of the VP entry. Default `none`.
 - `disable`: `content`, what it takes to overcome the obstacle. Default `none`.
 - `others`: `dict`, dictionary of other entry to add in the upper part of the obstacle's description. Format is `(EntryName: entry_value)`. Default `(:)`
+- `url`: `str`, a link or url to other ressources
+- `extra`: `dict`, dictionary of extra data on this object
+- `image`: `content`, image for this object
 
 ### Settlement
 
@@ -485,3 +533,6 @@ Settlements can be created with the `new_settlement()` function and its associat
 - `threats`: `content`, overview of the threats the settlement faces. Default `none`.
 - `npcs`: `dict`, dictionary of the important npcs of the settlement. Format is `("NPC's name": [npc's description])`
 - `others`: `dict`, dictionary of other entry to add in the upper part of the obstacle's description. Format is `(EntryName: entry_value)`. Default `(:)`
+- `url`: `str`, a link or url to other ressources
+- `extra`: `dict`, dictionary of extra data on this object
+- `image`: `content`, image for this object

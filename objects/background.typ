@@ -3,7 +3,18 @@
 
 #let class_background = "background"
 
-#let new_background(name, body, traits: (), short: none, tags: (), breakable: false, kind: "Background", url: none) = (
+#let new_background(
+  name,
+  body,
+  traits: (),
+  short: none,
+  tags: (),
+  breakable: false,
+  kind: "Background",
+  url: none,
+  image: none,
+  extras: (:),
+) = (
   class: class_background,
   name: name,
   body: body,
@@ -13,15 +24,17 @@
   breakable: breakable,
   kind: kind,
   url: url,
+  image: image,
+  extras: extras,
 )
 #let mk_background(background, theme: THEME, breakable: auto, short: (), hide: ()) = {
   itembox(
-    background.name, 
-    background.body, 
-    traits: background.traits, 
-    kind: background.kind, 
-    theme: theme, 
-    breakable: if breakable == auto {background.breakable} else {breakable}, 
+    background.name,
+    background.body,
+    traits: background.traits,
+    kind: background.kind,
+    theme: theme,
+    breakable: if breakable == auto { background.breakable } else { breakable },
     url: background.url,
   )
 }

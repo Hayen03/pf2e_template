@@ -3,10 +3,25 @@
 
 #let class_obstacle = "obstacle"
 
-#let new_obstacle(name, level: none, kind: "Obstacle", traits: (), tags: (), vp: none, vp_title: "VP", overcome: none, body, others: (:), breakable: false, url: none) = (
+#let new_obstacle(
+  name,
+  level: none,
+  kind: "Obstacle",
+  traits: (),
+  tags: (),
+  vp: none,
+  vp_title: "VP",
+  overcome: none,
+  body,
+  others: (:),
+  breakable: false,
+  url: none,
+  image: none,
+  extra: (:),
+) = (
   class: class_obstacle,
   name: name,
-  level: level, 
+  level: level,
   kind: kind,
   traits: clean_list(split_traits(traits)),
   tags: clean_list(split_traits(tags)),
@@ -17,6 +32,8 @@
   others: others,
   breakable: breakable,
   url: url,
+  image: image,
+  extras: extras,
 )
 #let mk_obstacle(obstacle, theme: THEME, short: false, breakable: auto, hide: ()) = {
   itembox(
@@ -24,7 +41,7 @@
     level: obstacle.level,
     traits: obstacle.traits,
     kind: obstacle.kind,
-    breakable: if breakable == auto {obstacle.breakable} else {breakable},
+    breakable: if breakable == auto { obstacle.breakable } else { breakable },
     theme: theme,
     hanging: true,
     url: obstacle.url,
@@ -40,7 +57,7 @@
     }
     #let bloc = bloc.filter(it => exists(it))
     #bloc.join(parbreak())
-    #if bloc.len() > 0 {hr()}
+    #if bloc.len() > 0 { hr() }
     #straight(obstacle.body)
   ]
 }
