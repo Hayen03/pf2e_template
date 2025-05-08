@@ -199,7 +199,7 @@
 #let mk_spell_use(
   spell_use,
   note: none,
-) = [_#if exists(spell_use.url) { link(spell_use.url, spell_use.name) } else { spell_use.name };_#if exists(note) [ (#note)]#if spell_use.uses != none and spell_use.uses > 1 [(#spell_use.uses/day)]]
+) = [_#if exists(spell_use.url) { link(spell_use.url, spell_use.name) } else { spell_use.name };_#if exists(note) [ (#note)]#if spell_use.uses != none { if type(spell_use.uses) == int and spell_use.uses > 1 [ (#spell_use.uses/day)] else if not type(spell_use.uses) == int [ (#spell_use.uses)] }]
 #let mk_spell_list(spell_list, heightened: auto, theme: THEME, breakable: auto, short: (), hide: ()) = {
   let h = if heightened == auto and spell_list.heightened == auto { none } else if spell_list.heightened == auto {
     heightened
