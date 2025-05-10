@@ -2,6 +2,7 @@
 #import "common.typ": *
 #import "weapon.typ": Weapon
 #import "spell.typ": new_spellcasting, mk_spellcasting, mk_spell_list, new_spell_list
+#import "affliction.typ": mk_affliction_inline
 
 #let class_creature = "creature"
 #let class_ability = "ability"
@@ -62,6 +63,7 @@
   feats: (),
   image: none,
   extras: (:),
+  afflictions: (),
 ) = {
   (
     class: class_creature,
@@ -112,6 +114,7 @@
     feats: as_list(feats),
     image: image,
     extras: extras,
+    afflictions: as_list(afflictions),
   )
 }
 #let new_ability(
@@ -350,6 +353,12 @@
         true
       } else { auto }
       trms.push(mk_ability(ability, short: s))
+    }
+    #for affliction in creature.afflictions {
+      let s = if short == true { true } else if type(short) == array and lower(affliction.name) in short {
+        true
+      } else if type(short) == str and lower(short) == lower(affliction.name) { true } else { auto }
+      trms.push(mk_affliction_inline(affliction, short: s))
     }
     #bloc.push(trms.join(parbreak()))
     #bloc.push(if exists(creature.feats) [*Additional Feats* #creature.feats.join(", ")])

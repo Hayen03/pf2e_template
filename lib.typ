@@ -14,6 +14,7 @@
 #import "objects/staff.typ": Staff, new_staff
 #import "objects/wand.typ": Wand, new_wand
 #import "objects/weapon.typ": Weapon, new_weapon
+#import "objects/affliction.typ": Affliction, new_affliction, mk_affliction, mk_affliction_inline, new_stage
 
 // ------------ TRANSFORM -----------\\
 
@@ -39,6 +40,7 @@
   staff: Staff.make,
   wand: Wand.make,
   weapon: Weapon.make,
+  affliction: Affliction.make,
 )
 
 #let mk(object, theme: THEME, short: auto, breakable: auto, hide: (), mk_reg: DEFAULT_MK_REGISTRY) = {
