@@ -91,12 +91,14 @@
     line.push[*HP* #hazard.hp#if "hp" in hazard.notes [ (#hazard.notes.hp)]]
   }
   #if exists(hazard.resistances) {
-    line.push[*Resistances* #hazard.resistances.keys().map(res => [#res #convert_data(hazard.resistances.at(res))]).join(", ")]
+    line.push[*Resistances* #hazard.resistances.keys().map(res => [#res #convert_data(hazard.resistances.at(res))#if "resistances" in hazard.notes and res in hazard.notes.resistances [ (#hazard.notes.resistances.at(res))]]).join(", ")]
   }
   #if exists(hazard.weaknesses) {
-    line.push[*Weaknesses* #hazard.weaknesses.keys().map(weak => [#weak #convert_data(hazard.weaknesses.at(weak))]).join(", ")]
+    line.push[*Weaknesses* #hazard.weaknesses.keys().map(weak => [#weak #convert_data(hazard.weaknesses.at(weak))#if "weaknesses" in hazard.notes and weak in hazard.notes.weaknesses [ (#hazard.notes.weaknesses.at(weak))]]).join(", ")]
   }
-  #if exists(hazard.immunities) { line.push[*Immunities* #hazard.immunities.join(", ")] }
+  #if exists(hazard.immunities) {
+    line.push[*Immunities* #hazard.immunities.map(immu => [#immu#if "immunities" in hazard.notes and immu in hazard.notes.immunities [ (#hazard.notes.immunities.at(immu))]]).join(", ")]
+  }
   #bloc.push(line.filter(it => exists(it)).join("; "))
   #blocs.push(bloc.filter(it => exists(it)).join(parbreak()))
   #let bloc = (
