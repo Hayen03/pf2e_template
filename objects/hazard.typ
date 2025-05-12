@@ -30,7 +30,7 @@
   breakable: false,
   url: none,
   image: none,
-  extra: (:),
+  extras: (:),
 ) = (
   class: class_hazard,
   name: name,

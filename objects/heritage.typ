@@ -13,7 +13,7 @@
   addons: (),
   url: none,
   image: none,
-  extra: (:),
+  extras: (:),
 ) = (
   class: class_heritage,
   name: name,

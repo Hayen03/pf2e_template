@@ -42,7 +42,7 @@
   runes: (),
   spell_lists: (),
   url: none,
-  extra: (:),
+  extras: (:),
   image: none,
 ) = (
   class: class_item,
@@ -74,7 +74,7 @@
   spell_lists: spell_lists,
   url: url,
   image: image,
-  extras: extra,
+  extras: extras,
 )
 #let new_activation(
   name: none,

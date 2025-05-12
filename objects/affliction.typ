@@ -17,7 +17,7 @@
   others: (:),
   notes: (:),
   url: none,
-  extra: (:),
+  extras: (:),
   image: none,
 ) = (
   name: name,
@@ -34,7 +34,7 @@
   others: others,
   notes: notes,
   url: url,
-  extra: extra,
+  extras: extras,
   image: image,
 )
 

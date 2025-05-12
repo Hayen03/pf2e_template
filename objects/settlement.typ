@@ -20,7 +20,7 @@
   breakable: false,
   url: none,
   image: none,
-  extra: (:),
+  extras: (:),
 ) = (
   class: class_settlement,
   name: name,

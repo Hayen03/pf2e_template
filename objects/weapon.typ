@@ -76,7 +76,7 @@
   spell_lists: (),
   url: none,
   image: none,
-  extra: (:),
+  extras: (:),
 ) = (
   class: class_weapon,
   name: name,

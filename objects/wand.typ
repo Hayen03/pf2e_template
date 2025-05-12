@@ -38,7 +38,7 @@
   runes: (),
   url: none,
   image: none,
-  extra: (:),
+  extras: (:),
 ) = (
   class: class_wand,
   variant: variant,

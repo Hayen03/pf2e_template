@@ -46,7 +46,7 @@
   tags: (),
   url: none,
   image: none,
-  extra: (:),
+  extras: (:),
 ) = (
   class: class_spell,
   name: name,

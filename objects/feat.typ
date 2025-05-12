@@ -21,7 +21,7 @@
   special: none,
   url: none,
   image: none,
-  extra: (:),
+  extras: (:),
 ) = (
   class: class_feat,
   name: name,

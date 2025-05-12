@@ -17,7 +17,7 @@
   breakable: false,
   url: none,
   image: none,
-  extra: (:),
+  extras: (:),
 ) = (
   class: class_obstacle,
   name: name,
