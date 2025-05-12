@@ -111,7 +111,7 @@
     },
     if exists(hazard.routine) and "routine" not in hide [*Routine* #hazard.routine],
   )
-  #blocs.push(bloc.filter(it => exists(it)).join())
+  #blocs.push(bloc.filter(it => exists(it)).join(parbreak()))
   #let bloc = hazard.activations.map(act => {
     if type(act) == dictionary and "class" in act {
       if act.class == class_activation { mk_activation(act, short: short) } else if (
