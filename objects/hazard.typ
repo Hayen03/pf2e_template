@@ -1,6 +1,7 @@
 #import "../base.typ": *
 #import "common.typ": *
 #import "item.typ": class_activation, mk_activation
+#import "creature.typ": Creature, mk_ability
 
 #let class_hazard = "hazard"
 
@@ -28,9 +29,6 @@
   kind: "Hazard",
   short: false,
   breakable: false,
-  url: none,
-  image: none,
-  extras: (:),
 ) = (
   class: class_hazard,
   name: name,
@@ -56,9 +54,6 @@
   notes: notes,
   short: short,
   breakable: breakable,
-  url: url,
-  image: image,
-  extras: extras,
 )
 #let mk_hazard(hazard, theme: THEME, short: auto, breakable: auto, hide: ()) = itembox(
   hazard.name,
@@ -68,7 +63,6 @@
   breakable: if breakable == auto { hazard.breakable } else { breakable },
   theme: theme,
   hanging: true,
-  url: hazard.url,
 )[
   #let blocs = ()
   #let bloc = ()
@@ -109,7 +103,7 @@
     if exists(hazard.action) and "action" not in hide {
       if type(hazard.action) == dictionary and "class" in hazard.action {
         if hazard.action.class == class_activation { mk_activation(hazard.action, short: short) } else if (
-          hazard.action.class == class_ability
+          hazard.action.class == Creature.ability.class
         ) { mk_ability(hazard.action, short: short) }
       } else { hazard.action }
     },
@@ -118,7 +112,9 @@
   #blocs.push(bloc.filter(it => exists(it)).join())
   #let bloc = hazard.activations.map(act => {
     if type(act) == dictionary and "class" in act {
-      if act.class == class_activation { mk_activation(act, short: short) } else if act.class == class_ability {
+      if act.class == class_activation { mk_activation(act, short: short) } else if (
+        act.class == Creature.ability.class
+      ) {
         mk_ability(act, short: short)
       }
     } else { act }
