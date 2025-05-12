@@ -29,6 +29,10 @@
   kind: "Hazard",
   short: false,
   breakable: false,
+  url: none,
+  image: none,
+  extras: (:),
+  actions_count: none,
 ) = (
   class: class_hazard,
   name: name,
@@ -54,6 +58,10 @@
   notes: notes,
   short: short,
   breakable: breakable,
+  url: url,
+  image: image,
+  extras: extras,
+  actions_count: actions_count,
 )
 #let mk_hazard(hazard, theme: THEME, short: auto, breakable: auto, hide: ()) = itembox(
   hazard.name,
@@ -109,7 +117,8 @@
         ) { mk_ability(hazard.action, short: short) }
       } else { hazard.action }
     },
-    if exists(hazard.routine) and "routine" not in hide [*Routine* #hazard.routine],
+    if exists(hazard.routine)
+      and "routine" not in hide [*Routine*#if exists(hazard.actions_count) [ (#hazard.actions_count)] #hazard.routine],
   )
   #blocs.push(bloc.filter(it => exists(it)).join(parbreak()))
   #let bloc = hazard.activations.map(act => {
