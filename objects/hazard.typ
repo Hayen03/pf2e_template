@@ -74,7 +74,9 @@
 )[
   #let blocs = ()
   #let bloc = ()
-  #if exists(hazard.stealth) and "stealth" not in hide { bloc.push[*Stealth* #hazard.stealth] }
+  #if exists(hazard.stealth) and "stealth" not in hide {
+    bloc.push[*Stealth* #convert_modifier(hazard.stealth) (DC #{ hazard.stealth + 10 })]
+  }
   #if exists(hazard.description) and "description" not in hide { bloc.push[*Description* #hazard.description] }
   #blocs.push(bloc.filter(it => exists(it)).join(parbreak()))
   #let bloc = hazard.others.pairs().map(it => [*#it.at(0)* #it.at(1)])
