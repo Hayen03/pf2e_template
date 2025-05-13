@@ -33,6 +33,7 @@
   image: none,
   extras: (:),
   actions_count: none,
+  additional_effect: none,
 ) = (
   class: class_hazard,
   name: name,
@@ -62,6 +63,7 @@
   image: image,
   extras: extras,
   actions_count: actions_count,
+  additional_effect: additional_effect,
 )
 #let mk_hazard(hazard, theme: THEME, short: auto, breakable: auto, hide: ()) = itembox(
   hazard.name,
@@ -75,7 +77,7 @@
   #let blocs = ()
   #let bloc = ()
   #if exists(hazard.stealth) and "stealth" not in hide {
-    bloc.push[*Stealth* #convert_modifier(hazard.stealth) (DC #{ hazard.stealth + 10 })]
+    bloc.push[*Stealth* #convert_modifier(hazard.stealth) (DC #{ hazard.stealth + 10 })#if "stealth" in hazard.notes [ (#hazard.notes.stealth)]]
   }
   #if exists(hazard.description) and "description" not in hide { bloc.push[*Description* #hazard.description] }
   #blocs.push(bloc.filter(it => exists(it)).join(parbreak()))
@@ -133,6 +135,7 @@
     } else { act }
   })
   #blocs.push(bloc.filter(it => exists(it)).join())
+  #blocs.push(if exists(hazard.additional_effect) [*Additional Effext* #hazard.additional_effect])
   #blocs.push(if exists(hazard.reset) [*Reset* #hazard.reset])
   #blocs.filter(it => exists(it)).join(hr())
 ]
