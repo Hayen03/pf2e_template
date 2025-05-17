@@ -8,9 +8,10 @@
   authors: (),
   columns: 1,
   title_page: false,
+  content_table: true,
 )
 
-#banner[= PF2E Template]
+#banner[= PF2E Typst Template]
 #col[
   #lorem(128)
   = First Level Heading

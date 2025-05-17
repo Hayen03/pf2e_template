@@ -48,33 +48,6 @@
   } else {object}
 }
 
-#let old_mk(object, theme: THEME, short: auto, breakable: auto, hide: ()) = {
-  if type(object) != dictionary or "class" not in object {object}
-  else if object.class == class_ability {mk_ability(object)}
-  else if object.class == class_activation {mk_activation(object)}
-  else if object.class == class_armor {mk_armor(object, theme: theme, breakable: breakable)}
-  else if object.class == class_attack {mk_attack(object)}
-  else if object.class == class_background {mk_background(object, theme: theme, breakable: breakable)}
-  else if object.class == class_creature {mk_creature(object, theme: theme, breakable: breakable, short: short)}
-  else if object.class == class_feat {mk_feat(object, theme: theme, breakable: breakable)}
-  else if object.class == class_heritage {mk_heritage(object, theme: theme, breakable: breakable)}
-  else if object.class == class_item {mk_item(object, theme: theme, breakable: breakable)}
-  else if object.class == class_shield {mk_shield(object, theme: theme, breakable: breakable)}
-  else if object.class == class_spell {mk_spell(object, theme: theme, breakable: breakable)}
-  else if object.class == class_spell_list {mk_spell_list(object)}
-  else if object.class == class_spellcasting {mk_spellcasting(object)}
-  else if object.class == class_variant {mk_item_variant(object)}
-  else if object.class == class_weapon {mk_weapon(object, theme: theme, breakable: breakable)}
-  else if object.class == class_hazard {mk_hazard(object, theme: theme, short: short, breakable: breakable, hide: hide)}
-  else if object.class == class_settlement {mk_settlement(object, theme: theme, short: short, breakable: breakable, hide: hide)}
-  else if object.class == class_obstacle {mk_obstacle(object, theme: theme, short: short, breakable: breakable, hide: hide)}
-  else if object.class == class_staff {mk_staff(object, theme: theme, short: short, breakable: breakable)}
-  else if object.class == class_wand {mk_wand(object, theme: theme, short: short, breakable: breakable)}
-  else if object.class == class_spellhold {mk_spellhold(object, theme: theme, short: short, breakable: breakable)}
-  else {object}
-}
-
-
 // ------------ TEMPLATE ------------ \\
 #let title_page(
   title,
@@ -150,6 +123,10 @@
     set block(above: 5pt, below: 0.3em)
     it
   }
+  show heading: it => {
+    set block(spacing: 8pt)
+    it
+  }
 
   //#show table.header: h => set
   set table(
@@ -186,9 +163,20 @@
 
     }
   }
-  if content_table {
-    set page(columns: 2)
-    outline() 
+  if exists(content_table) {
+    if type(content_table) == bool and content_table {
+      set page(columns: 2)
+      outline() 
+      pagebreak()
+    } else if type(content_table) == function {
+      content_table()
+      pagebreak()
+    } else if type(content_table) == content {
+      content_table
+      pagebreak()
+    } else {
+
+    }
   }
 
   let mk(object, short: auto, breakable: auto, hide: ()) = mk.with(theme: theme, mk_reg: mk_reg)

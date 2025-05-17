@@ -264,8 +264,20 @@
         set block(spacing: 4pt)
         align(if calc.odd(head.level) {center} else {left})[#head]
       }
-      show heading.where(level: 1): set text(size: theme.title_font_size)
-      show heading.where(level: 2): set text(size: theme.title_font_size)
+      show heading.where(level: 1): it => {
+        set text(size: theme.title_font_size)
+        it
+      }
+      show heading.where(level: 1, outlined: false): it => {
+        heading(depth: 1, outlined: true, it)
+      }
+      show heading.where(level: 2): it => {
+        set text(size: theme.title_font_size)
+        it
+      }
+      show heading.where(level: 2, outlined: false): it => {
+        heading(depth: 2, outlined: true, it)
+      }
       show heading.where(level: 3): set text(size: theme.subtitle_font_size)
       show heading.where(level: 4): set text(size: theme.subtitle_font_size)
       set align(left)

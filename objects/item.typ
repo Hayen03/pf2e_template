@@ -44,7 +44,7 @@
   spell_lists: spell_lists,
   url: url,
 )
-#let new_activation(name: none, actions: a, traits: (), frequency: none, requirements: none, trigger: none, prerequisites: none, duration: none, body, notes: (:), tags:(), url: none) = (
+#let new_activation(name: none, actions: a, traits: (), frequency: none, requirements: none, trigger: none, prerequisites: none, duration: none, body, notes: (:), tags:(), url: none, cost: none) = (
   class: class_activation,
   name: name,
   actions: actions,
@@ -58,6 +58,7 @@
   notes: notes,
   tags: clean_list(split_traits(tags)),
   url: url,
+  cost: cost,
 )
 #let new_variant(name, body, dc:none, price: none, bulk: none, usage:none, level:none, short: none, hardness: none, hp: none, others: (:), notes: (:), tags: (), craft_requirements: none, ac: none, url: none) = (
   class: class_variant,
@@ -90,6 +91,7 @@
     if exists(activation.frequency) {body.push([ *Frequency* #activation.frequency])}
     if exists(activation.duration) {body.push([ *Duration* #activation.duration])}
     if exists(activation.trigger) {body.push([ *Trigger* #activation.trigger])}
+    if exists(activation.cost) {body.push([ *Cost* #activation.cost])}
     if exists(activation.body) {body.push([#if body.len() > 0 [*Effect*] #activation.body])}
     body = body.filter(it => exists(it))
     pre = pre.filter(it => exists(it))
