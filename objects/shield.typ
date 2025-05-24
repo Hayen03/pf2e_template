@@ -4,7 +4,32 @@
 
 #let class_shield = "shield"
 
-#let new_shield(name, body, traits: (), price: none, ac_bonus: none, speed_penalty: none, bulk: none, hardness: none, hp: none, level: none, short: none, others: (:), activations: (), plus: false, variants: (), breakable: false, tags: (), after: none, craft_requirements: none, runes: (), spell_lists: (), url: none) = (
+#let new_shield(
+  name,
+  body,
+  traits: (),
+  price: none,
+  ac_bonus: none,
+  speed_penalty: none,
+  bulk: none,
+  hardness: none,
+  hp: none,
+  level: none,
+  short: none,
+  others: (:),
+  activations: (),
+  plus: false,
+  variants: (),
+  breakable: false,
+  tags: (),
+  after: none,
+  craft_requirements: none,
+  runes: (),
+  spell_lists: (),
+  url: none,
+  image: none,
+  extras: (:),
+) = (
   class: class_shield,
   name: name,
   body: body,
@@ -29,37 +54,48 @@
   runes: clean_list(split_traits(runes)),
   spell_lists: spell_lists,
   url: url,
+  image: image,
+  extras: extras,
 )
 #let mk_shield(shield, theme: THEME, breakable: auto, short: (), hide: ()) = {
   itembox(
-    shield.name, 
+    shield.name,
     traits: shield.traits,
     level: [#shield.level#if shield.plus == true [+]],
     kind: shield.kind,
-    breakable: if breakable == auto {shield.breakable} else {breakable},
+    breakable: if breakable == auto { shield.breakable } else { breakable },
     theme: theme,
     hanging: true,
     url: shield.url,
   )[
     #let body = ()
-    #if exists(shield.price) {body.push[*Price* #convert_price(shield.price)]}
+    #if exists(shield.price) { body.push[*Price* #convert_price(shield.price)] }
     #let line = ()
-    #if exists(shield.ac_bonus) {line.push[*AC Bonus* #convert_modifier(shield.ac_bonus)]} 
-    #if exists(shield.speed_penalty) {line.push[*Speed Penalty* #convert_modifier(shield.speed_penalty)]} 
-    #if exists(shield.bulk) {line.push[*Bulk* #convert_bulk(shield.bulk)]}
+    #if exists(shield.ac_bonus) { line.push[*AC Bonus* #convert_modifier(shield.ac_bonus)] }
+    #if exists(shield.speed_penalty) { line.push[*Speed Penalty* #convert_modifier(shield.speed_penalty)] }
+    #if exists(shield.bulk) { line.push[*Bulk* #convert_bulk(shield.bulk)] }
     #body.push(line.filter(it => exists(it)).join("; "))
     #let line = ()
-    #if exists(shield.hardness) {line.push[*Hardness* #shield.hardness]}
-    #if exists(shield.hp) {line.push[*HP(BT)* #{let hp = shield.hp; if hp == none {null} else {let hp = calc.floor(calc.abs(hp)); let bt = hp/2; [#hp\(#bt)]}}]}
+    #if exists(shield.hardness) { line.push[*Hardness* #shield.hardness] }
+    #if exists(shield.hp) {
+      line.push[*HP(BT)* #{
+          let hp = shield.hp
+          if hp == none { null } else {
+            let hp = calc.floor(calc.abs(hp))
+            let bt = hp / 2
+            [#hp\(#bt)]
+          }
+        }]
+    }
     #body.push(line.filter(it => exists(it)).join("; "))
-    #for other in shield.others.keys() {body.push[*#other* #shield.others.at(other)]}
+    #for other in shield.others.keys() { body.push[*#other* #shield.others.at(other)] }
     #let body = body.filter(it => exists(it))
-    #if exists(shield.runes) {bloc.push[*Runes* #shield.runes.map(it => lower(it)).join(", ")]}
+    #if exists(shield.runes) { bloc.push[*Runes* #shield.runes.map(it => lower(it)).join(", ")] }
     #body.join(parbreak())
-    #if body.len() > 0 {hr()}
+    #if body.len() > 0 { hr() }
     #straight(shield.body)
     #if exists(shield.craft_requirements) [#parbreak()*Craft Requirements* #shield.craft_requirements#parbreak()]
-    #if exists(shield.activations) {shield.activations.map(var => mk_activation(var)).join(parbreak())}
+    #if exists(shield.activations) { shield.activations.map(var => mk_activation(var)).join(parbreak()) }
     #let b = ()
     #for spell_list in shield.spell_lists {
       b.push(mk_spell_list(spell_list))
@@ -69,7 +105,7 @@
       hr()
       b.join(parbreak())
     }
-    #if exists(shield.after){
+    #if exists(shield.after) {
       hr()
       shield.after
     }
