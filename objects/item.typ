@@ -1,5 +1,6 @@
 #import "../base.typ": *
 #import "common.typ": *
+#import "spell.typ": mk_spell_list
 
 #let class_item = "item" 
 #let class_variant = "variant" 
@@ -60,7 +61,7 @@
   url: url,
   cost: cost,
 )
-#let new_variant(name, body, dc:none, price: none, bulk: none, usage:none, level:none, short: none, hardness: none, hp: none, others: (:), notes: (:), tags: (), craft_requirements: none, ac: none, url: none) = (
+#let new_variant(name, body, dc:none, price: none, bulk: none, usage:none, level:none, short: none, hardness: none, hp: none, others: (:), notes: (:), tags: (), craft_requirements: none, ac: none, url: none, spell_lists: ()) = (
   class: class_variant,
   name: name,
   body: body,
@@ -78,6 +79,7 @@
   craft_requirements: craft_requirements,
   ac: ac,
   url: url,
+  spell_lists: as_list(spell_lists),
 )
 #let mk_activation(activation, theme: THEME, breakable: auto, short: false, hide: false) = {
   let name = [Activation#if exists(activation.name) [---#activation.name]]
@@ -119,6 +121,9 @@
     #for other in variant.others.keys() {bloc.push[*#other* #variant.others.at(other)]}
     #if exists(variant.craft_requirements) {bloc.push[*Craft Requirements* #variant.craft_requirements]}
     #bloc.push(straight(variant.body))
+    #for spell_list in variant.spell_lists {
+      bloc.push(mk_spell_list(spell_list))
+    }
     #bloc.filter(it => exists(it)).join(parbreak())
   ]
 }
