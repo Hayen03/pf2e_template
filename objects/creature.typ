@@ -75,7 +75,7 @@
       traits
     } else { split_traits(traits) }),
     perception: perception,
-    senses: as_list(senses),
+    senses: if type(senses) == str { split_args(senses) } else { as_list(senses) },
     skills: skills,
     attributes: (
       strength: strength,
@@ -93,7 +93,7 @@
     hp: hp,
     resistances: resistances,
     weaknesses: weaknesses,
-    immunities: as_list(immunities),
+    immunities: if type(immunities) == str { split_args(immunities) } else { as_list(immunities) },
     speed: speed,
     abilities: as_list(abilities),
     attacks: as_list(attacks),
@@ -101,7 +101,7 @@
     description: description,
     short: short,
     size: size,
-    languages: split_args(languages),
+    languages: if type(languages) == str { split_args(languages) } else { as_list(languages) },
     spellcastings: as_list(spellcastings),
     notes: notes,
     others: others,
@@ -275,9 +275,9 @@
     #let bloc = ()
     #bloc.push[
       *AC* #creature.ac #if "ac" in creature.notes [ (#creature.notes.ac)]\;
-      *Fort* #convert_modifier(creature.fortitude)#if "fortitude" in creature.notes [(#creature.notes.fortitude)],
-      *Ref* #convert_modifier(creature.reflex)#if "reflex" in creature.notes [(#creature.notes.reflex)],
-      *Will* #convert_modifier(creature.will)#if "will" in creature.notes [(#creature.notes.will)]
+      *Fort* #convert_modifier(creature.fortitude)#if "fortitude" in creature.notes [ (#creature.notes.fortitude)],
+      *Ref* #convert_modifier(creature.reflex)#if "reflex" in creature.notes [ (#creature.notes.reflex)],
+      *Will* #convert_modifier(creature.will)#if "will" in creature.notes [ (#creature.notes.will)]
     ]
     #bloc.push(
       (
