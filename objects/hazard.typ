@@ -73,6 +73,7 @@
   breakable: if breakable == auto { hazard.breakable } else { breakable },
   theme: theme,
   hanging: true,
+  url: hazard.url,
 )[
   #let blocs = ()
   #let bloc = ()

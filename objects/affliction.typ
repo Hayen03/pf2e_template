@@ -69,6 +69,7 @@
     breakable: if breakable == auto { false } else { breakable },
     theme: theme,
     hanging: true,
+    url: affliction.url,
   )[
     #let save = [*Saving Throw* #(if exists(affliction.save) { affliction.save }, if exists(affliction.dc) [DC #affliction.dc]).filter(exists).join(" ")]
     #let bloc = (
