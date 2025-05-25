@@ -64,6 +64,7 @@
   image: none,
   extras: (:),
   afflictions: (),
+  specials: (),
 ) = {
   (
     class: class_creature,
@@ -106,15 +107,16 @@
     others: others,
     tags: clean_list(split_traits(tags)),
     family: family,
-    items: clean_list(split_traits(items)),
+    items: if type(items) == str { split_args(items) } else { as_list(items) },
     hardness: hardness,
     kind: kind,
     breakable: breakable,
     url: url,
-    feats: as_list(feats),
+    feats: if type(feats) == str { split_args(feats) } else { as_list(feats) },
     image: image,
     extras: extras,
     afflictions: as_list(afflictions),
+    specials: if type(specials) == str { split_args(specials) } else { as_list(specials) },
   )
 }
 #let new_ability(
@@ -362,6 +364,7 @@
     }
     #bloc.push(trms.join(parbreak()))
     #bloc.push(if exists(creature.feats) [*Additional Feats* #creature.feats.join(", ")])
+    #bloc.push(if exists(creature.specials) [*Additional Features* #creature.specials.join(", ")])
     #bloc.filter(it => exists(it)).join(parbreak())
   ]
 }
