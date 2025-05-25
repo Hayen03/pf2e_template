@@ -92,7 +92,8 @@
   url: none,
   image: none,
   extras: (:),
-  cost: none) = (
+  cost: none,
+) = (
   class: class_activation,
   name: name,
   actions: actions,
@@ -129,7 +130,9 @@
   url: none,
   image: none,
   extras: (:),
- spell_lists: ()) = (
+  spell_lists: (),
+  activations: (),
+) = (
   class: class_variant,
   name: name,
   body: body,
@@ -150,6 +153,7 @@
   image: image,
   extras: extras,
   spell_lists: as_list(spell_lists),
+  activations: as_list(activations),
 )
 #let mk_activation(activation, theme: THEME, breakable: auto, short: false, hide: false) = {
   let name = [Activation#if exists(activation.name) [---#activation.name]]
@@ -164,7 +168,7 @@
     if exists(activation.frequency) { body.push([ *Frequency* #activation.frequency]) }
     if exists(activation.duration) { body.push([ *Duration* #activation.duration]) }
     if exists(activation.trigger) { body.push([ *Trigger* #activation.trigger]) }
-    if exists(activation.cost) {body.push([ *Cost* #activation.cost])}
+    if exists(activation.cost) { body.push([ *Cost* #activation.cost]) }
     if exists(activation.body) { body.push([#if body.len() > 0 [*Effect*] #activation.body]) }
     body = body.filter(it => exists(it))
     pre = pre.filter(it => exists(it))
@@ -215,6 +219,9 @@
     #for other in variant.others.keys() { bloc.push[*#other* #variant.others.at(other)] }
     #if exists(variant.craft_requirements) { bloc.push[*Craft Requirements* #variant.craft_requirements] }
     #bloc.push(straight(variant.body))
+    #for activation in variant.activations {
+      bloc.push(mk_activation(activation))
+    }
     #for spell_list in variant.spell_lists {
       bloc.push(mk_spell_list(spell_list))
     }
