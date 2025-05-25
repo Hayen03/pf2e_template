@@ -229,6 +229,7 @@ Lots of items have variants, such as the Elixir of Life, which can be lesser, gr
 - `craft_requirements`: `str` or `content`, the crafting requirements, if any. Default `none`.
 - `others`: `dict`, other entry to be added. Default `(:)`
 - `notes`: `dict`, notes. Works the same as for items. Default `(:)`
+- `activations`: `array` of activation object, list of the variant's activations. Default to `()`.
 
 ### Armors
 
@@ -266,7 +267,7 @@ Staff and Wand objects are a type of items and have the same parameters. They do
 Weapons are a type of items, and as such they can take all of the parameter of items, plus a few more. They are created with `new_weapon()` and the assiciaterd make function is `mk_weapon()`.
 
 - `damage`: `int`, the size of the damage die of the weapon. Default `none`.
-- `n_dice`: `int`, the number of damage dices of the weapon. Default `none`.
+- `n_dice`: `int`, the number of damage dices of the weapon. Default `1`.
 - `damage_type`: `str` or `content`, the damage type of the weapon. The `Weapon.damages` enumeration can be used. Default `none`.
 - `atk_bonus`: `int`, the item bonus to attack roll of the weapon, such as the one given by a potency rune. Default `none`.
 - `hands`: `int` or `content`, the number of hands it takes to wield the weapon. The `Weapon.hands` enumeration can be used. Default `none`.
@@ -278,9 +279,29 @@ Weapons are a type of items, and as such they can take all of the parameter of i
 - `ammo`: `str` or `content`, the type of ammunition the weapon uses, if any. Default `none`.
 - `ammo_price`: `number`, the price of an ammunition for this weapon. Default `none`.
 - `ammo_bulk`: `int` or `L`, the bulk of an ammunition for this weapon. Default `none`.
+- `configurations`: `array`, list of `configuration` objects representing combination weapon's configurations
 - `url`: `str`, a link or url to other ressources
 - `extra`: `dict`, dictionary of extra data on this object
 - `image`: `content`, image for this object
+
+### Configurations
+Represents a single configuration, with damage die, group and traits for that configuration. Can be created with `new_configuration()`
+
+- `name`: `str` or `content`, special name for the configuration. Default to `none`.
+- `traits`: `str` or `array`, the traits of the configuration. Default `()`.
+- `body`: `str` or `content`, optional description and effect of the configuration.
+- `damage`: `int`, the damage die of the configuration. Default to `none`.
+- `damage_type`: `str` or `content`, the damage type of the configuration. The `Weapon.damages` enumeration can be used. Default `none`.
+- `n_dice`: `int`, the number of damage dices of the configuration. Default `1`.
+- `type`: `str` or `content`, the type of the configuration, either "melee" or "ranged". The `Weapon.types` enumeration can be used. Default `none`. Will be used to identify the configuration if no name is specified.
+- `group`: `str` or `content`, the configuration's group. The `Weapon.groups` enumeration can be used. Default `none`.
+- `range`: `int`, the range increment of the configuration in feet, if any. Default `none`.
+- `reload`: `int`, the number of action it takes to reload the wconfiguration, if any. Default `none`.
+- `ammo`: `str` or `content`, the type of ammunition the configuration uses, if any. Default `none`.
+- `ammo_price`: `number`, the price of an ammunition for this configuration. Default `none`.
+- `ammo_bulk`: `int` or `L`, the bulk of an ammunition for this configuration. Default `none`.
+- `hands`: `int` or `content`, the number of hands it takes to wield the configuration. The `Weapon.hands` enumeration can be used. Default `none`.
+- `activations`: `array` of activation object, list of the configuration special activations. Default to `()`.
 
 ### Feats
 

@@ -38,7 +38,24 @@
   bludgeoning: "B",
 )
 
-#let new_configuration(name: none, damage: none, hands: none, range: none, reload: none, type: none, group: none, ammo: none, traits: (),  ammo_price: none, ammo_bulk: none, damage_type: none, notes: (:), n_dice: 1, ) = (
+#let new_configuration(
+  name: none,
+  damage: none,
+  hands: none,
+  range: none,
+  reload: none,
+  type: none,
+  group: none,
+  ammo: none,
+  traits: (),
+  ammo_price: none,
+  ammo_bulk: none,
+  damage_type: none,
+  notes: (:),
+  n_dice: 1,
+  body: none,
+  activations: (),
+) = (
   name: name,
   damage: damage,
   damage_type: damage_type,
@@ -53,26 +70,40 @@
   ammo_price: ammo_price,
   ammo_bulk: ammo_bulk,
   notes: notes,
+  body: body,
+  activations: as_list(activations),
 )
 #let mk_configuration(configuration, theme: THEME, breakable: auto, short: false, hide: false) = {
   let lines = (
-    if exists(configuration.name) [*#configuration.name*] else if exists(configuration.type) [*#configuration.type*] else {none},
-    if exists(configuration.traits) {print_traits(configuration.traits, theme: theme)} else {none},
+    if exists(configuration.name) [*#configuration.name*] else if exists(
+      configuration.type,
+    ) [*#configuration.type*] else { none },
+    if exists(configuration.traits) { print_traits(configuration.traits, theme: theme) } else { none },
     (
-      [*Damage* #if exists(configuration.damage) [#configuration.n_dice;d#configuration.damage #if exists(configuration.damage_type) {configuration.damage_type}] else {none}],
+      [*Damage* #if exists(configuration.damage) [#configuration.n_dice;d#configuration.damage #if exists(configuration.damage_type) { configuration.damage_type }] else { none }],
       if exists(configuration.hands) [*Hands* #convert_data(configuration.hands)],
-    ).filter(exists).join("; "),
+    )
+      .filter(exists)
+      .join("; "),
     (
       if exists(configuration.range) [*Range* #convert_data(configuration.range) ft.],
       if exists(configuration.reload) [*Reload* #convert_data(configuration.reload)],
-    ).filter(it => exists(it)).join("; "),
+    )
+      .filter(it => exists(it))
+      .join("; "),
     (
       if exists(configuration.ammo) [*Ammunition* #convert_data(configuration.ammo)],
       if exists(configuration.ammo_bulk) [*Ammo Bulk* #convert_bulk(configuration.ammo_bulk)],
       if exists(configuration.ammo_price) [*Ammo Price* #convert_price(configuration.ammo_price)],
-    ).filter(it => it != none).join("; "),
+    )
+      .filter(it => it != none)
+      .join("; "),
     if exists(configuration.group) [*Group* #configuration.group],
+    configuration.body,
   )
+  for activation in configuration.activations {
+    lines.push(mk_activation(activation))
+  }
   lines.filter(exists).join(parbreak())
 }
 
@@ -113,7 +144,7 @@
   atk_bonus: none,
   runes: (),
   spell_lists: (),
-  url: none, 
+  url: none,
   configurations: (),
   image: none,
   extras: (:),
@@ -182,10 +213,14 @@
     )
     #bloc.push(
       (
-        if exists(weapon.damage) [*Damage* #if exists(weapon.damage) [#weapon.n_dice;d#weapon.damage #if exists(weapon.damage_type) { weapon.damage_type }] else { none }],
+        if exists(
+          weapon.damage,
+        ) [*Damage* #if exists(weapon.damage) [#weapon.n_dice;d#weapon.damage #if exists(weapon.damage_type) { weapon.damage_type }] else { none }],
         [*Bulk* #convert_bulk(weapon.bulk)],
         if exists(weapon.hands) [*Hands* #convert_data(weapon.hands)],
-      ).filter(exists).join("; "),
+      )
+        .filter(exists)
+        .join("; "),
     )
     #bloc.push(
       (
@@ -200,7 +235,9 @@
         if exists(weapon.type) [*Type* #convert_data(weapon.type)],
         if exists(weapon.category) [*Category* #convert_data(weapon.category)],
         if exists(weapon.group) [*Group* #convert_data(weapon.group)],
-      ).filter(exists).join("; "),
+      )
+        .filter(exists)
+        .join("; "),
     )
     #if exists(weapon.ammo) [
       #let line = (
