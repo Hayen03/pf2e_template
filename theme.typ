@@ -20,7 +20,7 @@
 #let BIG_HEADING_FONT = ("Taroca", "Eagle Lake")
 #let BLOCK_HEADING_FONT = "Bebas Neue"
 #let SMALL_HEADING_FONT = "Roboto"
-#let CENTER_CELL_PATTERN = regex("\A(?:(?:[+-−—]?\d+(?:(?:\s*(?i:gp|sp|cp|pp))?|L))|(?:--)|–|−|—|L|(?:\d+-\d+))\z")
+#let CENTER_CELL_PATTERN = regex("\A(?:(?:[+-−—]?\d+(?:(?:\s*(?i:gp|sp|cp|pp))?|L))|(?:--)|–|−|—|L|(?:\d+-\d+)|\d+\+)\z")
 #let NORMAL_FONT_SIZE = 9pt
 #let BLOCK_FONT_SIZE = 9pt
 #let TITLE_HEADING_FONT_SIZE = 23pt
