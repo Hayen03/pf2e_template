@@ -19,7 +19,7 @@
 #let MAIN_TEXT_FONT = ("Sabon", "Libre Baskerville")
 #let BIG_HEADING_FONT = ("Taroca", "Eagle Lake")
 #let BLOCK_HEADING_FONT = "Bebas Neue"
-#let SMALL_HEADING_FONT = "Gin Roboto"
+#let SMALL_HEADING_FONT = ("Gin", "Roboto")
 #let CENTER_CELL_PATTERN = regex("\A(?:(?:[+-−—]?\d+(?:(?:\s*(?i:gp|sp|cp|pp))?|L))|(?:--)|–|−|—|L|(?:\d+-\d+)|\d+\+)\z")
 #let NORMAL_FONT_SIZE = 9pt
 #let BLOCK_FONT_SIZE = 9pt
