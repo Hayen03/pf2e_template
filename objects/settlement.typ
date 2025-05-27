@@ -21,6 +21,7 @@
   url: none,
   image: none,
   extras: (:),
+  short_desc: none,
 ) = (
   class: class_settlement,
   name: name,
@@ -40,6 +41,7 @@
   url: url,
   image: image,
   extras: extras,
+  short_desc: short_desc,
 )
 #let mk_settlement(settlement, theme: THEME, short: false, hide: (), breakable: auto) = {
   itembox(

@@ -22,6 +22,7 @@
   url: none,
   image: none,
   extras: (:),
+  short_desc: none,
 ) = (
   class: class_feat,
   name: name,
@@ -42,6 +43,7 @@
   url: url,
   image: image,
   extras: extras,
+  short_desc: short_desc,
 )
 #let mk_feat(feat, theme: THEME, breakable: auto, short: (), hide: ()) = {
   itembox(

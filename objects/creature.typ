@@ -65,6 +65,7 @@
   extras: (:),
   afflictions: (),
   specials: (),
+  short_desc: none,
 ) = {
   (
     class: class_creature,
@@ -117,6 +118,7 @@
     extras: extras,
     afflictions: as_list(afflictions),
     specials: if type(specials) == str { split_args(specials) } else { as_list(specials) },
+    short_desc: short_desc,
   )
 }
 #let new_ability(
@@ -140,6 +142,7 @@
   url: none,
   image: none,
   extras: (:),
+  short_desc: none,
 ) = {
   (
     class: class_ability,
@@ -163,6 +166,7 @@
     url: url,
     image: image,
     extras: extras,
+    short_desc: short_desc,
   )
 }
 #let mk_ability(ability, short: auto, breakable: auto, hide: (), theme: THEME) = {
@@ -199,6 +203,7 @@
   url: none,
   image: none,
   extras: (:),
+  short_desc: none,
 ) = (
   class: class_attack,
   name: name,
@@ -211,6 +216,7 @@
   url: url,
   image: image,
   extras: extras,
+  short_desc: short_desc,
 )
 #let mk_attack(attack, theme: THEME, breakable: auto, short: false, hide: ()) = {
   let line = (

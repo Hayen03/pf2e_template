@@ -148,6 +148,7 @@
   configurations: (),
   image: none,
   extras: (:),
+  short_desc: none,
 ) = (
   class: class_weapon,
   name: name,
@@ -190,6 +191,7 @@
   configurations: as_list(configurations),
   image: image,
   extras: extras,
+  short_desc: short_desc,
 )
 #let mk_weapon(weapon, theme: THEME, breakable: auto, short: (), hide: ()) = {
   itembox(

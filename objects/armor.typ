@@ -51,6 +51,7 @@
   url: none,
   image: none,
   extras: (:),
+  short_desc: none,
 ) = (
   name: name,
   body: body,
@@ -84,6 +85,7 @@
   url: url,
   image: image,
   extras: extras,
+  short_desc: short_desc,
 )
 #let mk_armor(armor, theme: THEME, breakable: auto, short: (), hide: ()) = {
   itembox(

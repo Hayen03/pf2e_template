@@ -47,6 +47,7 @@
   url: none,
   image: none,
   extras: (:),
+  short_desc: none,
 ) = (
   class: class_spell,
   name: name,
@@ -76,6 +77,7 @@
   url: url,
   image: image,
   extras: extras,
+  short_desc: short_desc,
 )
 #let mk_spell(spell, theme: THEME, breakable: auto, short: (), hide: ()) = {
   let tradition = {
@@ -154,6 +156,7 @@
   focus: none,
   image: none,
   extras: (:),
+  short_desc: none,
 ) = (
   class: class_spellcasting,
   tradition: tradition,
@@ -165,6 +168,7 @@
   focus: focus,
   image: image,
   extras: extras,
+  short_desc: short_desc,
 )
 #let spell_use(name, uses: none, url: none) = ("name": name, "uses": uses, url: url)
 #let new_spell_list(..spells, slots: none, rank: 0, notes: (:), heightened: none) = {

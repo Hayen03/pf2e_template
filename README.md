@@ -60,7 +60,7 @@ There are shortcuts to add the actions glyph to your document.
 - reaction: `#r`
 - free action: `#f`
 
-There is also a show rule that applies to the same symbol written between colons. For exemple, 1 action can be written as `#a` or `:a:` in text. In code, only `a` works.
+There is also a show rule that applies to the same symbol written between colons. For example, 1 action can be written as `#a` or `:a:` in text. In code, only `a` works.
 
 ## Utility Functions
 
@@ -97,11 +97,11 @@ The `itembox()` function takes care of the layout for items, feats, spells, crea
 - `level`: `int` or `content`, the level of the stat block
 - `traits`: `array` or `str`. Traits of the stat block. Accept a string of comma separated trait, or an array of strings.
 - `size`: `relative`, if you, for some reason, wants to change the width of the stat block. By default it uses the full width.
-- `breakable`: `bool`, can this block be breaked across pages.
+- `breakable`: `bool`, can this block be broken across pages.
 - `hanging`: `bool`, should the paragraph in the body have a hanging indent by default.
 - `theme`: `theme()`, to change the theme of the stat block.
 
-## `feature()` Fucntion
+## `feature()` Function
 
 `feature()` is used to create only the top part of an itembox. As the name suggest, it is mostly used for class features.
 
@@ -176,7 +176,7 @@ Items are for all sorts of mundane and magical items. Can be created with `new_i
 - `kind`: `str` or `content`, the type of statblock. Default `"Item"`.
 - `variant`: `str` or `content`, shows the value in parenthesis after the name. Default `none`.
 - `traits`: `str` or `array`, the traits of the items. Default `()`.
-- `tags`: `str` or `array`, list of tags. Tags are not shown but can be used to sort and catergorise statblocks. Default `()`.
+- `tags`: `str` or `array`, list of tags. Tags are not shown but can be used to sort and categorize statblocks. Default `()`.
 - `price`: `number`, the price, in gp, of the item. Default `none`.
 - `bulk`: `int` `none` or `L`, the bulk of the item. The special value `L` can be used. Default `none`.
 - `usage`: `str` or `content`, the usage of the item. Default `none`.
@@ -194,9 +194,10 @@ Items are for all sorts of mundane and magical items. Can be created with `new_i
 - `after`: `str` or `content`, block of text shown after `spell_lists` in a different block. Default `none`.
 - `variants`: `array`, list of variant objects for this item. Shown at the end, each in a different block. Default `()`.
 - `runes`: `array`, list of runes on this object
-- `url`: `str`, a link or url to other ressources
+- `url`: `str`, a link or url to other resources
 - `extra`: `dict`, dictionary of extra data on this object
 - `image`: `content`, image for this object
+- `short_desc`: `content`, a short description of the object. Useful when creating tables. Default `none`.
 
 ### Activations
 
@@ -211,6 +212,7 @@ Lots of items can be activated and those activations can be represented with an 
 - `prerequisites`: `str` or `content`, the prerequisites of this activation, if any. Default `none`.
 - `requirements`: `str` or `content`,  the requirements of this activation, if any. Default `none`.
 - `duration`: `str` or `content`,  the duration of this activation, if any. Default `none`.
+- `short_desc`: `content`, a short description of the object. Useful when creating tables. Default `none`.
 
 ### Variants
 
@@ -230,10 +232,11 @@ Lots of items have variants, such as the Elixir of Life, which can be lesser, gr
 - `others`: `dict`, other entry to be added. Default `(:)`
 - `notes`: `dict`, notes. Works the same as for items. Default `(:)`
 - `activations`: `array` of activation object, list of the variant's activations. Default to `()`.
+- `short_desc`: `content`, a short description of the object. Useful when creating tables. Default `none`.
 
 ### Armors
 
-Armors are a type of items, and as such they can take all of the parameter of items, plus a few more. They are created with `new_armor()` and the assiciaterd make function is `mk_armor()`.
+Armors are a type of items, and as such they can take all of the parameter of items, plus a few more. They are created with `new_armor()` and the associated make function is `mk_armor()`.
 
 - `ac_bonus`: `int`. Default `none`.
 - `dex_cap`: `int`. Default `none`.
@@ -244,19 +247,21 @@ Armors are a type of items, and as such they can take all of the parameter of it
 - `strength`: `int`, the minimal strength required to reduce the armor's penalty. Default `none`.
 - `save_bonus`: `int`, the armor's bonus to all saving throw, if any. Most likely due to a Resilient rune. Default `none`.
 - `runes`: `array`, list of runes on this object
-- `url`: `str`, a link or url to other ressources
+- `url`: `str`, a link or url to other resources
 - `extra`: `dict`, dictionary of extra data on this object
 - `image`: `content`, image for this object
+- `short_desc`: `content`, a short description of the object. Useful when creating tables. Default `none`.
 
 ### Shields
 
-Shields are a type of items, and as such they can take all of the parameter of items, plus a few more. They are created with `new_shield()` and the assiciaterd make function is `mk_shield()`.
+Shields are a type of items, and as such they can take all of the parameter of items, plus a few more. They are created with `new_shield()` and the associated make function is `mk_shield()`.
 
 - `ac_bonus`: `int`. Default `none`.
 - `speed_penalty`: `int`. Default `none`.
-- `url`: `str`, a link or url to other ressources
+- `url`: `str`, a link or url to other resources
 - `extra`: `dict`, dictionary of extra data on this object
 - `image`: `content`, image for this object
+- `short_desc`: `content`, a short description of the object. Useful when creating tables. Default `none`.
 
 ### Staves and Wands
 
@@ -264,7 +269,7 @@ Staff and Wand objects are a type of items and have the same parameters. They do
 
 ### Weapons
 
-Weapons are a type of items, and as such they can take all of the parameter of items, plus a few more. They are created with `new_weapon()` and the assiciaterd make function is `mk_weapon()`.
+Weapons are a type of items, and as such they can take all of the parameter of items, plus a few more. They are created with `new_weapon()` and the associated make function is `mk_weapon()`.
 
 - `damage`: `int`, the size of the damage die of the weapon. Default `none`.
 - `n_dice`: `int`, the number of damage dices of the weapon. Default `1`.
@@ -280,9 +285,10 @@ Weapons are a type of items, and as such they can take all of the parameter of i
 - `ammo_price`: `number`, the price of an ammunition for this weapon. Default `none`.
 - `ammo_bulk`: `int` or `L`, the bulk of an ammunition for this weapon. Default `none`.
 - `configurations`: `array`, list of `configuration` objects representing combination weapon's configurations
-- `url`: `str`, a link or url to other ressources
+- `url`: `str`, a link or url to other resources
 - `extra`: `dict`, dictionary of extra data on this object
 - `image`: `content`, image for this object
+- `short_desc`: `content`, a short description of the object. Useful when creating tables. Default `none`.
 
 ### Configurations
 Represents a single configuration, with damage die, group and traits for that configuration. Can be created with `new_configuration()`
@@ -296,12 +302,13 @@ Represents a single configuration, with damage die, group and traits for that co
 - `type`: `str` or `content`, the type of the configuration, either "melee" or "ranged". The `Weapon.types` enumeration can be used. Default `none`. Will be used to identify the configuration if no name is specified.
 - `group`: `str` or `content`, the configuration's group. The `Weapon.groups` enumeration can be used. Default `none`.
 - `range`: `int`, the range increment of the configuration in feet, if any. Default `none`.
-- `reload`: `int`, the number of action it takes to reload the wconfiguration, if any. Default `none`.
+- `reload`: `int`, the number of action it takes to reload the configuration, if any. Default `none`.
 - `ammo`: `str` or `content`, the type of ammunition the configuration uses, if any. Default `none`.
 - `ammo_price`: `number`, the price of an ammunition for this configuration. Default `none`.
 - `ammo_bulk`: `int` or `L`, the bulk of an ammunition for this configuration. Default `none`.
 - `hands`: `int` or `content`, the number of hands it takes to wield the configuration. The `Weapon.hands` enumeration can be used. Default `none`.
 - `activations`: `array` of activation object, list of the configuration special activations. Default to `()`.
+- `short_desc`: `content`, a short description of the object. Useful when creating tables. Default `none`.
 
 ### Feats
 
@@ -313,16 +320,17 @@ Feats can be created with the `new_feat()` function and its associated make func
 - `kind`: `str` or `content`, the kind of statblock. Default `"Feat"`.
 - `actions`: `content`, the amount of action it takes to use this feat. Default `none`.
 - `traits`: `str` or `array`, the traits of the feat. Default `()`.
-- `tags`: `str` or `array`, list of tags. Tags are not shown but can be used to sort and catergorise statblocks. Default `()`.
-- `prerequisites`: `str` or `content`, prerequesites to take this feat, if any. Default `none`.
+- `tags`: `str` or `array`, list of tags. Tags are not shown but can be used to sort and categorize statblocks. Default `()`.
+- `prerequisites`: `str` or `content`, prerequisites to take this feat, if any. Default `none`.
 - `requirements`: `str` or `content`, requirements to use this feat, if any. Default `none`.
 - `trigger`: `str` or `content`, trigger to use this feat, if any. Default `none`.
 - `frequency`: `str` or `content`, the frequency at which this feat can be used, if any. Default `none`.
 - `others`: `dict`, dictionary of other entry to add in the upper part of the feat's description. Format is `(EntryName: entry_value)`. Default `(:)`.
 - `special`: `str` or `content`, special entry at the end of the feat's description. Default `none`.
-- `url`: `str`, a link or url to other ressources
+- `url`: `str`, a link or url to other resources
 - `extra`: `dict`, dictionary of extra data on this object
 - `image`: `content`, image for this object
+- `short_desc`: `content`, a short description of the object. Useful when creating tables. Default `none`.
 
 ### Spells
 
@@ -334,14 +342,14 @@ Spells can be created with the `new_spell()` function and its associated make fu
 - `kind`: `str` or `content`, the kind of statblock. Usually `"Spell"` or `"Focus"`. The `Spell.kinds` enumeration can be used. Default `"Spell"`.
 - `actions`: `content`, the amount of action it takes to cast this spell. Default `none`.
 - `traits`: `str` or `array`, the traits of the spell. Default `()`.
-- `tags`: `str` or `array`, list of tags. Tags are not shown but can be used to sort and catergorise statblocks. Default `()`.
-- `prerequisites`: `str` or `content`, prerequesites to take this spell, if any. Default `none`.
+- `tags`: `str` or `array`, list of tags. Tags are not shown but can be used to sort and categorize statblocks. Default `()`.
+- `prerequisites`: `str` or `content`, prerequisites to take this spell, if any. Default `none`.
 - `requirements`: `str` or `content`, requirements to cast this spell, if any. Default `none`.
 - `trigger`: `str` or `content`, trigger to cast this spell, if any. Default `none`.
 - `duration`: `str` or `content`, the duration of the spell, if any. Default `none`.
 - `range`: `str` or `content`, the range of the spell, if any. Default `none`.
 - `target`: `str` or `content`, the target of the spell, if any. Default `none`.
-- `defense`: `str` or `content`, the defense against the spell, ususally a saving throw. Default `none`.
+- `defense`: `str` or `content`, the defense against the spell, usually a saving throw. Default `none`.
 - `area`: `str` or `content`, the area of the spell, if any. Default `none`.
 - `locus`: `str` or `content`, the locus required to cast the spell, if any. Default `none`.
 - `cost`: `str` or `content`, the cost required to cast the spell, if any. Default `none`.
@@ -349,9 +357,10 @@ Spells can be created with the `new_spell()` function and its associated make fu
 - `spell_lists`: `array`, list of other spell lists, such as class specific, that have access to this spell. Default `()`.
 - `others`: `dict`, dictionary of other entry to add in the upper part of the spell's description. Format is `(EntryName: entry_value)`. Default `(:)`.
 - `heightened`: `dict`, dictionary containing the information of the heightened spell for the entries after the description. Format is `("rank or +n": content)`. Default `(:)`.
-- `url`: `str`, a link or url to other ressources
+- `url`: `str`, a link or url to other resources
 - `extra`: `dict`, dictionary of extra data on this object
 - `image`: `content`, image for this object
+- `short_desc`: `content`, a short description of the object. Useful when creating tables. Default `none`.
 
 ### Creatures
 
@@ -362,7 +371,7 @@ Creatures can be created with the `new_creature()` function and its associated m
 - `level`: `int`, the level of the creature. Default `none`.
 - `kind`: `str` or `content`, the kind of statblock. Default `"Creature"`.
 - `traits`: `str` or `array`, the traits of the creature. Default `()`.
-- `tags`: `str` or `array`, list of tags. Tags are not shown but can be used to sort and catergorise statblocks. Default `()`.
+- `tags`: `str` or `array`, list of tags. Tags are not shown but can be used to sort and categorize statblocks. Default `()`.
 - `family`: , the creature family of this creature. Not shown but can be used for filtering.
 - `size`: `str`, the size of the creature. The `Creature.sizes` enumeration can be used. Default `none`.
 - `perception`: `int`, Default `0`.
@@ -390,12 +399,14 @@ Creatures can be created with the `new_creature()` function and its associated m
 - `abilities`: `array`, list of ability objects that represent all of the creature's special abilities. Default `()`.
 - `spellcastings`: `array`, list of spellcasting objects that represent all of the creature's spellcasting abilities. Default `()`.
 - `dc`: `int`, common DC for the creature's ability. Default `none`.
-- `others`: `dict`, dictionary of other entry to add in the general section of the statsblock. Format is `(EntryName: entry_value)`. Default `(:)`.
+- `others`: `dict`, dictionary of other entry to add in the general section of the statblock. Format is `(EntryName: entry_value)`. Default `(:)`.
 - `notes`: `dict`, notes for this creature's properties. You can give notes to a specific resistance, weakness, immunity or speed by giving a dictionary using the resistance, weakness, immunity or speed name as the key. Ex: `notes: (resistances: (slashing: [Except from adamantine]))`. Default `(:)`.
-- `url`: `str`, a link or url to other ressources
+- `url`: `str`, a link or url to other resources
 - `extra`: `dict`, dictionary of extra data on this object
 - `image`: `content`, image for this object
 - `feats`: `array`, list of extra feats this creature has
+- `specials`: `array`, list of other features the creature has (such as weapon specialization). Default `()`.
+- `short_desc`: `content`, a short description of the object. Useful when creating tables. Default `none`.
 
 ### Attacks
 
@@ -407,10 +418,11 @@ Attack objects represent a creature's basic Strikes. They can be created with th
 - `traits`: `str` or `array`, the traits of the attack. Default `()`.
 - `type`: `str`, the weapon type, either melee or ranged, of the attack. The `Weapon.types` enumeration can be used. Default `"Melee"`.
 - `actions`: `content`, the actions it takes to use this attack. Default `a`.
-- `tags`: `str` or `array`, list of tags. Tags are not shown but can be used to sort and catergorise statblocks. Default `()`.
-- `url`: `str`, a link or url to other ressources
+- `tags`: `str` or `array`, list of tags. Tags are not shown but can be used to sort and categorize statblocks. Default `()`.
+- `url`: `str`, a link or url to other resources
 - `extra`: `dict`, dictionary of extra data on this object
 - `image`: `content`, image for this object
+- `short_desc`: `content`, a short description of the object. Useful when creating tables. Default `none`.
 
 ### Abilities
 
@@ -420,21 +432,22 @@ Ability objects represent a creature's special abilities. They can be created wi
 - `body`: `content`, the ability's effect. Mandatory.
 - `actions`: `content`, the amount of action it takes to use this ability. Default `none`.
 - `traits`: `str` or `array`, the traits of the ability. Default `()`.
-- `tags`: `str` or `array`, list of tags. Tags are not shown but can be used to sort and catergorise statblocks. Default `()`.
+- `tags`: `str` or `array`, list of tags. Tags are not shown but can be used to sort and categorize statblocks. Default `()`.
 - `category`: `str`, either `"general"`, `"defensive"` or `"offensive"`. Changes in which section the ability appears. The `Creature.ability.categories` enumeration can be used. Default `"general"`.
-- `prerequisites`: `str` or `content`, prerequesites to take this ability, if any. Default `none`.
+- `prerequisites`: `str` or `content`, prerequisites to take this ability, if any. Default `none`.
 - `requirements`: `str` or `content`, requirements to use this ability, if any. Default `none`.
 - `trigger`: `str` or `content`, trigger to use this ability, if any. Default `none`.
 - `duration`: `str` or `content`, the duration of the ability, if any. Default `none`.
 - `range`: `str` or `content`, the range of the ability, if any. Default `none`.
 - `target`: `str` or `content`, the target of the ability, if any. Default `none`.
-- `defense`: `str` or `content`, the defense against the ability, ususally a saving throw. Default `none`.
+- `defense`: `str` or `content`, the defense against the ability, usually a saving throw. Default `none`.
 - `area`: `str` or `content`, the area of the ability, if any. Default `none`.
 - `frequency`: `str` or `content`, the frequency at which the ability can be used, if any. Default `none`.
 - `others`: `dict`, dictionary of other entry to add before the ability's effect. Format is `(EntryName: entry_value)`. Default `(:)`.
-- `url`: `str`, a link or url to other ressources
+- `url`: `str`, a link or url to other resources
 - `extra`: `dict`, dictionary of extra data on this object
 - `image`: `content`, image for this object
+- `short_desc`: `content`, a short description of the object. Useful when creating tables. Default `none`.
 
 ### Spellcasting
 
@@ -446,9 +459,10 @@ Ability objects represent a creature's ability to cast spells. They can be creat
 - `dc`: `int`, the spellcasting DC. The spellcasting modifier is automatically calculated. Default `10`.
 - `focus`: `int`, the amount of focus point available for this spellcasting. Default `none`.
 - `spell_lists`: `array`, list of spell list objects. Default `()`.
-- `url`: `str`, a link or url to other ressources
+- `url`: `str`, a link or url to other resources
 - `extra`: `dict`, dictionary of extra data on this object
 - `image`: `content`, image for this object
+- `short_desc`: `content`, a short description of the object. Useful when creating tables. Default `none`.
 
 ### Spell List
 
@@ -459,9 +473,10 @@ A spell list object is just a collection of spells at a certain rank. They can b
 - `heightened`: `int`, for cantrip, the rank at which they are heightened. Will calculate automatically based on the creature's level if set to `auto`. Default `auto`.
 - `notes`: `dict`, notes for specific spells. Default `(:)`.
 - `..spells`: `array`, list of spell name.
-- `url`: `str`, a link or url to other ressources
+- `url`: `str`, a link or url to other resources
 - `extra`: `dict`, dictionary of extra data on this object
 - `image`: `content`, image for this object
+- `short_desc`: `content`, a short description of the object. Useful when creating tables. Default `none`.
 
 ### Hazards
 
@@ -472,7 +487,7 @@ Hazards can be created with the `new_hazard()` function and its associated make 
 - `level`: `int`, the level of the hazard. Default `none`.
 - `kind`: `str` or `content`, the kind of statblock. Default `"Hazard"`.
 - `traits`: `str` or `array`, the traits of the hazard. Default `()`.
-- `tags`: `str` or `array`, list of tags. Tags are not shown but can be used to sort and catergorise statblocks. Default `()`.
+- `tags`: `str` or `array`, list of tags. Tags are not shown but can be used to sort and categorize statblocks. Default `()`.
 - `stealth`: `int`, the stealth modifier of the hazard. Default `none`.
 - `disable`: `content`, what it takes to disable the hazard. Default `none`.
 - `ac`: `int`, Default `0`.
@@ -488,9 +503,10 @@ Hazards can be created with the `new_hazard()` function and its associated make 
 - `activations`: `array`, list of actions the hazard can take. Each action takes the form of an activation object. Default `()`.
 - `others`: `dict`, dictionary of other entry to add in the upper part of the hazard's description. Format is `(EntryName: entry_value)`. Default `(:)`
 - `notes`: `dict`, notes for the hazard entries. Default `(:)`
-- `url`: `str`, a link or url to other ressources
+- `url`: `str`, a link or url to other resources
 - `extra`: `dict`, dictionary of extra data on this object
 - `image`: `content`, image for this object
+- `short_desc`: `content`, a short description of the object. Useful when creating tables. Default `none`.
 
 ### Backgrounds
 
@@ -501,10 +517,11 @@ Backgrounds can be created with the `new_background()` function and its associat
 - `level`: `int`, the level of the background. Default `none`.
 - `kind`: `str` or `content`, the kind of statblock. Default `"Background"`.
 - `traits`: `str` or `array`, the traits of the background. Default `()`.
-- `tags`: `str` or `array`, list of tags. Tags are not shown but can be used to sort and catergorise statblocks. Default `()`.
-- `url`: `str`, a link or url to other ressources
+- `tags`: `str` or `array`, list of tags. Tags are not shown but can be used to sort and categorize statblocks. Default `()`.
+- `url`: `str`, a link or url to other resources
 - `extra`: `dict`, dictionary of extra data on this object
 - `image`: `content`, image for this object
+- `short_desc`: `content`, a short description of the object. Useful when creating tables. Default `none`.
 
 ### Heritages
 
@@ -513,11 +530,12 @@ Heritages can be created with the `new_heritage()` function and its associated m
 - `name`: `str` or `content`, the name of the heritage. Mandatory.
 - `body`: `content`, the description of the heritage. Mandatory.
 - `traits`: `str` or `array`, the traits of the heritage. Default `()`.
-- `tags`: `str` or `array`, list of tags. Tags are not shown but can be used to sort and catergorise statblocks. Default `()`.
+- `tags`: `str` or `array`, list of tags. Tags are not shown but can be used to sort and categorize statblocks. Default `()`.
 - `addons`: `array`, list of additional components that are associated with the heritage but do not need to be on the same page, like actions. Default `()`.
-- `url`: `str`, a link or url to other ressources
+- `url`: `str`, a link or url to other resources
 - `extra`: `dict`, dictionary of extra data on this object
 - `image`: `content`, image for this object
+- `short_desc`: `content`, a short description of the object. Useful when creating tables. Default `none`.
 
 ### Obstacles
 
@@ -528,14 +546,15 @@ Obstacles can be created with the `new_obstacle()` function and its associated m
 - `level`: `int`, the level of the obstacle. Default `none`.
 - `kind`: `str` or `content`, the kind of statblock. Default `"Obstacle"`.
 - `traits`: `str` or `array`, the traits of the obstacle. Default `()`.
-- `tags`: `str` or `array`, list of tags. Tags are not shown but can be used to sort and catergorise statblocks. Default `()`.
+- `tags`: `str` or `array`, list of tags. Tags are not shown but can be used to sort and categorize statblocks. Default `()`.
 - `vp`: `int`, the amount of victory points one needs to overcome this obstacle. Default `none`.
 - `vp_title`: `content`, changes the name of the VP entry. Default `none`.
 - `disable`: `content`, what it takes to overcome the obstacle. Default `none`.
 - `others`: `dict`, dictionary of other entry to add in the upper part of the obstacle's description. Format is `(EntryName: entry_value)`. Default `(:)`
-- `url`: `str`, a link or url to other ressources
+- `url`: `str`, a link or url to other resources
 - `extra`: `dict`, dictionary of extra data on this object
 - `image`: `content`, image for this object
+- `short_desc`: `content`, a short description of the object. Useful when creating tables. Default `none`.
 
 ### Settlement
 
@@ -546,7 +565,7 @@ Settlements can be created with the `new_settlement()` function and its associat
 - `level`: `int`, the level of the obstacle. Default `none`.
 - `kind`: `str` or `content`, the kind of statblock. Default `"Obstacle"`.
 - `traits`: `str` or `array`, the traits of the obstacle. Default `()`.
-- `tags`: `str` or `array`, list of tags. Tags are not shown but can be used to sort and catergorise statblocks. Default `()`.
+- `tags`: `str` or `array`, list of tags. Tags are not shown but can be used to sort and categorize statblocks. Default `()`.
 - `government`: `content`, overview of the government of the settlement. Default `none`.
 - `population`: `content`, overview of the population of the settlement. Default `none`.
 - `languages`: `content`, overview of the languages spoken in the settlement. Default `none`.
@@ -554,6 +573,28 @@ Settlements can be created with the `new_settlement()` function and its associat
 - `threats`: `content`, overview of the threats the settlement faces. Default `none`.
 - `npcs`: `dict`, dictionary of the important npcs of the settlement. Format is `("NPC's name": [npc's description])`
 - `others`: `dict`, dictionary of other entry to add in the upper part of the obstacle's description. Format is `(EntryName: entry_value)`. Default `(:)`
-- `url`: `str`, a link or url to other ressources
-- `extra`: `dict`, dictionary of extra data on this object
-- `image`: `content`, image for this object
+- `url`: `str`, a link or url to other resources. Default `none`
+- `extra`: `dict`, dictionary of extra data on this object. Default `(:)`
+- `image`: `content`, image for this object. Default `none`.
+- `short_desc`: `content`, a short description of the object. Useful when creating tables. Default `none`.
+
+
+### Affliction
+Afflictions can be created with the `new_affliction()` function and its associated make function is `mk_affliction()`. There is also a `mk_affliction_inline()` for the inline representation of the affliction.
+
+- `name`: `str` or `content`, the name of the obstacle. Mandatory.
+- `level`: `int`, the level of the obstacle. Default `none`.
+- `traits`: `str` or `array`, the traits of the obstacle. Default `()`.
+- `save`: `str`, The saving throw against the affliction. Default `none`.
+- `dc`: `int`, the DC of the affliction's saving throw. Default `none`.
+- `max_duration`: `content`, maximum duration of the affliction. Default `none`.
+- `stages`: `array`, list of stages for the affliction. Can be created with `new_stage()`. Default `()`.
+- `kind`: `str` or `content`, the kind of statblock. Default `"Affliction"`.
+- `onset`: `content`, onset of the affliction. Default: `none`.
+- `tags`: `str` or `array`, list of tags. Tags are not shown but can be used to sort and categorize statblocks. Default `()`.
+- `others`: `dict`, dictionary of other entry to add in the upper part of the obstacle's description. Format is `(EntryName: entry_value)`. Default `(:)`.
+- `notes`: `dict`, notes for the hazard entries. Default `(:)`.
+- `url`: `str`, a link or url to other resources. Default `none`
+- `extras`: `dict`, dictionary of extra data on this object
+- `image`: `content`, image for this object. Default `none`.
+- `short_desc`: `content`, a short description of the object. Useful when creating tables. Default `none`.

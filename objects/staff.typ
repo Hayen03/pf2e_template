@@ -39,6 +39,7 @@
   url: none,
   image: none,
   extras: (:),
+  short_desc: none,
 ) = (
   class: class_staff,
   variant: variant,
@@ -70,6 +71,7 @@
   url: url,
   image: image,
   extras: extras,
+  short_desc: short_desc,
 )
 #let mk_staff(item, theme: THEME, breakable: auto, short: (), hide: ()) = {
   itembox(

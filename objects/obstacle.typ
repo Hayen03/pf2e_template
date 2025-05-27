@@ -18,6 +18,7 @@
   url: none,
   image: none,
   extras: (:),
+  short_desc: none,
 ) = (
   class: class_obstacle,
   name: name,
@@ -34,6 +35,7 @@
   url: url,
   image: image,
   extras: extras,
+  short_desc: short_desc,
 )
 #let mk_obstacle(obstacle, theme: THEME, short: false, breakable: auto, hide: ()) = {
   itembox(

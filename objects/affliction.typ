@@ -19,6 +19,7 @@
   url: none,
   extras: (:),
   image: none,
+  short_desc: none,
 ) = (
   name: name,
   class: class_affliction,
@@ -36,6 +37,7 @@
   url: url,
   extras: extras,
   image: image,
+  short_desc: short_desc,
 )
 
 #let new_stage(body, duration: none) = (

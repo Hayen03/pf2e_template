@@ -45,6 +45,7 @@
   url: none,
   extras: (:),
   image: none,
+  short_desc: none,
 ) = (
   class: class_item,
   variant: variant,
@@ -76,6 +77,7 @@
   url: url,
   image: image,
   extras: extras,
+  short_desc: short_desc,
 )
 #let new_activation(
   name: none,
@@ -93,6 +95,7 @@
   image: none,
   extras: (:),
   cost: none,
+  short_desc: none,
 ) = (
   class: class_activation,
   name: name,
@@ -110,6 +113,7 @@
   image: image,
   extras: extras,
   cost: cost,
+  short_desc: short_desc,
 )
 #let new_variant(
   name,
@@ -132,6 +136,7 @@
   extras: (:),
   spell_lists: (),
   activations: (),
+  short_desc: none,
 ) = (
   class: class_variant,
   name: name,
@@ -154,6 +159,7 @@
   extras: extras,
   spell_lists: as_list(spell_lists),
   activations: as_list(activations),
+  short_desc: short_desc,
 )
 #let mk_activation(activation, theme: THEME, breakable: auto, short: false, hide: false) = {
   let name = [Activation#if exists(activation.name) [---#activation.name]]

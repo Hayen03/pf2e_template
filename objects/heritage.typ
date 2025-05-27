@@ -14,6 +14,7 @@
   url: none,
   image: none,
   extras: (:),
+  short_desc: none,
 ) = (
   class: class_heritage,
   name: name,
@@ -26,6 +27,7 @@
   url: url,
   image: image,
   extras: extras,
+  short_desc: short_desc,
 )
 #let mk_heritage(heritage, theme: THEME, breakable: auto, short: (), hide: ()) = {
   block(

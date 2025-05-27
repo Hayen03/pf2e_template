@@ -34,6 +34,7 @@
   extras: (:),
   actions_count: none,
   additional_effect: none,
+  short_desc: none,
 ) = (
   class: class_hazard,
   name: name,
@@ -64,6 +65,7 @@
   extras: extras,
   actions_count: actions_count,
   additional_effect: additional_effect,
+  short_desc: short_desc,
 )
 #let mk_hazard(hazard, theme: THEME, short: auto, breakable: auto, hide: ()) = itembox(
   hazard.name,
