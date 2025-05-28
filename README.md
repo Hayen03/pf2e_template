@@ -169,8 +169,8 @@ All make function take these four parameters:
 
 Items are for all sorts of mundane and magical items. Can be created with `new_item`and its associated make function is `mk_item()`
 
-- `name`: `str` or `content`, the name of the object. Mandatory.
-- `body`: `content`, the description of the object. Mandatory.
+- `name`: `str` or `content`, the name of the object. Mandatory. Positional Argument.
+- `body`: `content`, the description of the object. Mandatory. Positional Argument.
 - `level`: `int`, the level of the item. Default `none`.
 - `plus`: `bool`, decides if a '+' symbols should be shown after the level. Default `false`.
 - `kind`: `str` or `content`, the type of statblock. Default `"Item"`.
@@ -203,8 +203,8 @@ Items are for all sorts of mundane and magical items. Can be created with `new_i
 
 Lots of items can be activated and those activations can be represented with an object created with the `new_activation()` function. It's associated make function is `mk_activation()`.
 
-- `name`: `str` or `content`, the name of the object. Mandatory.
-- `body`: `content`, the description of the object. Mandatory.
+- `name`: `str` or `content`, the name of the object. Mandatory. Positional Argument.
+- `body`: `content`, the description of the object. Mandatory. Positional Argument.
 - `actions`: `content`, the actions it takes to use this activation. Default `a`.
 - `traits`: `str` or `array`, the traits of the activation. Default `()`.
 - `frequency`: `str` or `content`, the frequency at which this activation can be used. Default `none`.
@@ -218,8 +218,8 @@ Lots of items can be activated and those activations can be represented with an 
 
 Lots of items have variants, such as the Elixir of Life, which can be lesser, greater or major. These variants are represented by an object created with the `new_variant()` function. Its associated make function is `mk_variant()`.
 
-- `name`: `str`, `int` or `content`, the name of the object. If given a number, the entry will be shown as **Rank**. If the name is in the `Item.grades` enumeration, the entry will be shown as **Grade**. Mandatory.
-- `body`: `content`, the description of the object. Mandatory.
+- `name`: `str`, `int` or `content`, the name of the object. If given a number, the entry will be shown as **Rank**. If the name is in the `Item.grades` enumeration, the entry will be shown as **Grade**. Mandatory. Positional Argument.
+- `body`: `content`, the description of the object. Mandatory. Positional Argument.
 - `level`: `int`, the level of the variant. Default `none`.
 - `price`: `number`, the price of the variant in gp. Default `none`.
 - `bulk`: `int` `none` or `L`, the bulk of the item. The special value `L` can be used. Default `none`.
@@ -295,7 +295,7 @@ Represents a single configuration, with damage die, group and traits for that co
 
 - `name`: `str` or `content`, special name for the configuration. Default to `none`.
 - `traits`: `str` or `array`, the traits of the configuration. Default `()`.
-- `body`: `str` or `content`, optional description and effect of the configuration.
+- `body`: `str` or `content`, optional description and effect of the configuration. Default to `none`
 - `damage`: `int`, the damage die of the configuration. Default to `none`.
 - `damage_type`: `str` or `content`, the damage type of the configuration. The `Weapon.damages` enumeration can be used. Default `none`.
 - `n_dice`: `int`, the number of damage dices of the configuration. Default `1`.
@@ -314,8 +314,8 @@ Represents a single configuration, with damage die, group and traits for that co
 
 Feats can be created with the `new_feat()` function and its associated make function is `mk_feat()`.
 
-- `name`: `str` or `content`, the name of the object. Mandatory.
-- `body`: `content`, the description of the object. Mandatory.
+- `name`: `str` or `content`, the name of the object. Mandatory. Positional Argument.
+- `body`: `content`, the description of the object. Mandatory. Positional Argument.
 - `level`: `int`, the level of the feat. Default `none`.
 - `kind`: `str` or `content`, the kind of statblock. Default `"Feat"`.
 - `actions`: `content`, the amount of action it takes to use this feat. Default `none`.
@@ -336,8 +336,8 @@ Feats can be created with the `new_feat()` function and its associated make func
 
 Spells can be created with the `new_spell()` function and its associated make function is `mk_spell()`.
 
-- `name`: `str` or `content`, the name of the object. Mandatory.
-- `body`: `content`, the description of the object. Mandatory.
+- `name`: `str` or `content`, the name of the object. Mandatory. Positional Argument.
+- `body`: `content`, the description of the object. Mandatory. Positional Argument.
 - `rank`: `int`, the rank of the spell. Default `none`.
 - `kind`: `str` or `content`, the kind of statblock. Usually `"Spell"` or `"Focus"`. The `Spell.kinds` enumeration can be used. Default `"Spell"`.
 - `actions`: `content`, the amount of action it takes to cast this spell. Default `none`.
@@ -366,8 +366,8 @@ Spells can be created with the `new_spell()` function and its associated make fu
 
 Creatures can be created with the `new_creature()` function and its associated make function is `mk_creature()`.
 
-- `name`: `str` or `content`, the name of the creature. Mandatory.
-- `description`: `content`, the description of the creature. Mandatory.
+- `name`: `str` or `content`, the name of the creature. Mandatory. Positional Argument.
+- `description`: `content`, the description of the creature. Mandatory. Positional Argument.
 - `level`: `int`, the level of the creature. Default `none`.
 - `kind`: `str` or `content`, the kind of statblock. Default `"Creature"`.
 - `traits`: `str` or `array`, the traits of the creature. Default `()`.
@@ -412,8 +412,8 @@ Creatures can be created with the `new_creature()` function and its associated m
 
 Attack objects represent a creature's basic Strikes. They can be created with the `new_attack()` function and the associated make function is `mk_attack()`.
 
-- `name`: `str` or `content`, the name of the attack. Mandatory.
-- `damage`: `str` or `content`, the damage and effect of the attack. Mandatory.
+- `name`: `str` or `content`, the name of the attack. Mandatory. Positional Argument.
+- `damage`: `str` or `content`, the damage and effect of the attack. Mandatory. Positional Argument.
 - `bonus`: `int`, the bonus to the attack roll for this attack. Default `0`.
 - `traits`: `str` or `array`, the traits of the attack. Default `()`.
 - `type`: `str`, the weapon type, either melee or ranged, of the attack. The `Weapon.types` enumeration can be used. Default `"Melee"`.
@@ -428,8 +428,8 @@ Attack objects represent a creature's basic Strikes. They can be created with th
 
 Ability objects represent a creature's special abilities. They can be created with the `new_ability()` function and the associated make function is `mk_ability()`.
 
-- `name`: `str` or `content`, the name of the object. Mandatory.
-- `body`: `content`, the ability's effect. Mandatory.
+- `name`: `str` or `content`, the name of the object. Mandatory. Positional Argument.
+- `body`: `content`, the ability's effect. Mandatory. Positional Argument.
 - `actions`: `content`, the amount of action it takes to use this ability. Default `none`.
 - `traits`: `str` or `array`, the traits of the ability. Default `()`.
 - `tags`: `str` or `array`, list of tags. Tags are not shown but can be used to sort and categorize statblocks. Default `()`.
@@ -482,7 +482,7 @@ A spell list object is just a collection of spells at a certain rank. They can b
 
 Hazards can be created with the `new_hazard()` function and its associated make function is `mk_hazard()`.
 
-- `name`: `str` or `content`, the name of the hazard. Mandatory.
+- `name`: `str` or `content`, the name of the hazard. Mandatory. Positional Argument.
 - `description`: `content`, the description of the hazard. Default `none`.
 - `level`: `int`, the level of the hazard. Default `none`.
 - `kind`: `str` or `content`, the kind of statblock. Default `"Hazard"`.
@@ -512,8 +512,8 @@ Hazards can be created with the `new_hazard()` function and its associated make 
 
 Backgrounds can be created with the `new_background()` function and its associated make function is `mk_background()`.
 
-- `name`: `str` or `content`, the name of the background. Mandatory.
-- `body`: `content`, the description of the background. Mandatory.
+- `name`: `str` or `content`, the name of the background. Mandatory. Positional Argument.
+- `body`: `content`, the description of the background. Mandatory. Positional Argument.
 - `level`: `int`, the level of the background. Default `none`.
 - `kind`: `str` or `content`, the kind of statblock. Default `"Background"`.
 - `traits`: `str` or `array`, the traits of the background. Default `()`.
@@ -527,8 +527,8 @@ Backgrounds can be created with the `new_background()` function and its associat
 
 Heritages can be created with the `new_heritage()` function and its associated make function is `mk_heritage()`.
 
-- `name`: `str` or `content`, the name of the heritage. Mandatory.
-- `body`: `content`, the description of the heritage. Mandatory.
+- `name`: `str` or `content`, the name of the heritage. Mandatory. Positional Argument.
+- `body`: `content`, the description of the heritage. Mandatory. Positional Argument.
 - `traits`: `str` or `array`, the traits of the heritage. Default `()`.
 - `tags`: `str` or `array`, list of tags. Tags are not shown but can be used to sort and categorize statblocks. Default `()`.
 - `addons`: `array`, list of additional components that are associated with the heritage but do not need to be on the same page, like actions. Default `()`.
@@ -541,8 +541,8 @@ Heritages can be created with the `new_heritage()` function and its associated m
 
 Obstacles can be created with the `new_obstacle()` function and its associated make function is `mk_obstacle()`.
 
-- `name`: `str` or `content`, the name of the obstacle. Mandatory.
-- `body`: `content`, the description of the obstacle. Mandatory.
+- `name`: `str` or `content`, the name of the obstacle. Mandatory. Positional Argument.
+- `body`: `content`, the description of the obstacle. Mandatory. Positional Argument.
 - `level`: `int`, the level of the obstacle. Default `none`.
 - `kind`: `str` or `content`, the kind of statblock. Default `"Obstacle"`.
 - `traits`: `str` or `array`, the traits of the obstacle. Default `()`.
@@ -560,8 +560,8 @@ Obstacles can be created with the `new_obstacle()` function and its associated m
 
 Settlements can be created with the `new_settlement()` function and its associated make function is `mk_settlement()`.
 
-- `name`: `str` or `content`, the name of the obstacle. Mandatory.
-- `body`: `content`, the description of the obstacle. Mandatory.
+- `name`: `str` or `content`, the name of the obstacle. Mandatory. Positional Argument.
+- `body`: `content`, the description of the obstacle. Mandatory. Positional Argument.
 - `level`: `int`, the level of the obstacle. Default `none`.
 - `kind`: `str` or `content`, the kind of statblock. Default `"Obstacle"`.
 - `traits`: `str` or `array`, the traits of the obstacle. Default `()`.
@@ -582,7 +582,7 @@ Settlements can be created with the `new_settlement()` function and its associat
 ### Affliction
 Afflictions can be created with the `new_affliction()` function and its associated make function is `mk_affliction()`. There is also a `mk_affliction_inline()` for the inline representation of the affliction.
 
-- `name`: `str` or `content`, the name of the obstacle. Mandatory.
+- `name`: `str` or `content`, the name of the obstacle. Mandatory. Positional Argument.
 - `level`: `int`, the level of the obstacle. Default `none`.
 - `traits`: `str` or `array`, the traits of the obstacle. Default `()`.
 - `save`: `str`, The saving throw against the affliction. Default `none`.
@@ -598,3 +598,127 @@ Afflictions can be created with the `new_affliction()` function and its associat
 - `extras`: `dict`, dictionary of extra data on this object
 - `image`: `content`, image for this object. Default `none`.
 - `short_desc`: `content`, a short description of the object. Useful when creating tables. Default `none`.
+
+## Enumerations
+Here are the names and values for each enumeration
+
+### Creature.sizes
+- tiny
+- small
+- medium
+- large
+- huge
+- gargantuan
+
+### Creature.ability.categories
+- general
+- offensive
+- defensive
+
+### Armor.proficiencies
+- unarmored
+- light
+- medium
+- heavy
+
+### Armor.groups
+- cloth
+- leather
+- chain
+- composite
+- plate
+- skeletal
+- wood
+
+### Item.grades
+- minor
+- lesser
+- moderate
+- greater
+- major
+- true
+
+### Spell.traditions
+- occult
+- divine
+- arcane
+- primal
+
+### Spell.types
+- spontaneous
+- prepared
+- innate
+- focus
+- ritual
+
+### Spell.kinds
+- focus
+- spell
+
+
+### Weapon.categories
+- simple
+- martial
+- advanced
+- improvised
+- unarmed
+
+### Weapon.damages
+- slashing
+- piercing
+- bludgeoning
+
+### Weapon.groups
+- axe
+- bomb
+- bow
+- brawling
+- club
+- crossbow
+- dart
+- firearm
+- flail
+- hammer
+- knife
+- pick
+- polearm
+- shield
+- sling
+- spear
+- sword
+
+### Weapon.types
+- ranged
+- melee
+
+### Weapons.hands
+- zero
+- one
+- one_plus
+- two
+
+### Proficiencies
+- untrained
+- trained
+- expert
+- master
+- legendary
+- mythic
+
+### Damages
+- piercing
+- slashing
+- bludgeoning
+- force
+- acid
+- cold
+- electricity
+- fire
+- sonic
+- spirit
+- void
+- vitality
+- mental
+- poison
+- bleed
+- precision

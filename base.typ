@@ -34,12 +34,12 @@
 
 #let split_args(..args, f: a => a) = {
   args
-  .pos()
-  .flatten()
-  .filter(e => type(e) == str)
-  .map(s => s.split(",").filter(it => it != none and it != ""))
-  .flatten()
-  .map(s => f(s.trim()))
+    .pos()
+    .flatten()
+    .filter(e => type(e) == str)
+    .map(s => s.split(",").filter(it => it != none and it != ""))
+    .flatten()
+    .map(s => f(s.trim()))
 }
 
 #let straight(body) = {
@@ -57,27 +57,31 @@
     return none
   }
   set text(
-    fill: theme.tag_text_color, 
-    font: theme.block_heading_font, 
+    fill: theme.tag_text_color,
+    font: theme.block_heading_font,
     weight: "bold",
-    size: theme.trait_font_size
+    size: theme.trait_font_size,
   )
   let tg = lower(name)
-  let fill = if tg == "uncommon" {theme.uncommon_tag_color} else if tg == "rare" {theme.rare_tag_color} else if tg == "unique" {theme.unique_tag_color} else if tg in size_tag_list {theme.size_tag_color} else if tg in alignement_tag_list {theme.alignement_tag_color} else {theme.tag_color}
+  let fill = if tg == "uncommon" { theme.uncommon_tag_color } else if tg == "rare" { theme.rare_tag_color } else if (
+    tg == "unique"
+  ) { theme.unique_tag_color } else if tg in size_tag_list { theme.size_tag_color } else if tg in alignement_tag_list {
+    theme.alignement_tag_color
+  } else { theme.tag_color }
   box(
     rect(
-      height: auto, 
-      width: auto, 
-      fill: fill, 
+      height: auto,
+      width: auto,
+      fill: fill,
       stroke: (
-        x: 3pt + theme.tag_border_color, 
-        y: 2pt + theme.tag_border_color
+        x: 3pt + theme.tag_border_color,
+        y: 2pt + theme.tag_border_color,
       ),
       inset: (
         x: 0% + 6pt,
-        y: 0% + 3pt
+        y: 0% + 3pt,
       ),
-    )[#tg]
+    )[#tg],
   )
 }
 #let trait_sorting_key(name) = {
@@ -106,14 +110,28 @@
 }
 // show a line of tags from a comma separated string or list of string
 #let print_traits(..args, theme: THEME) = {
-  let str_array = split_traits(..args)
-  .sorted(key: trait_sorting_key);
-  
-  str_array.map(s => print_trait(s, theme: theme))
-  .join()
+  let str_array = split_traits(..args).sorted(key: trait_sorting_key)
+
+  str_array.map(s => print_trait(s, theme: theme)).join()
 }
 
-#let itembox(name, body, actions: none, kind: none, level: none, traits: none, size: 100%, breakable: false, theme: THEME, hanging: false, url: none) = block(width: size, inset: (y: 0.3em), above: 1.2em, breakable: breakable,
+#let itembox(
+  name,
+  body,
+  actions: none,
+  kind: none,
+  level: none,
+  traits: none,
+  size: 100%,
+  breakable: false,
+  theme: THEME,
+  hanging: false,
+  url: none,
+) = block(
+  width: size,
+  inset: (y: 0.3em),
+  above: 1.2em,
+  breakable: breakable,
   // heading
   {
     set par(
@@ -126,47 +144,54 @@
     show ":aaa:": aaa
     show ":r:": r
     show ":f:": f
-    
-    block(below: 0.5em,{
-      show heading: it => {
-        set text(
-          font: theme.block_heading_font,
-          size: theme.bloc_heading_font_size,
-          fill: black,
-          bottom-edge: 0.3em,
-          top-edge: 0.3em,
+
+    block(
+      below: 0.5em,
+      {
+        show heading: it => {
+          set text(
+            font: theme.block_heading_font,
+            size: theme.bloc_heading_font_size,
+            fill: black,
+            bottom-edge: 0.3em,
+            top-edge: 0.3em,
+          )
+          set align(bottom)
+          it
+        }
+        grid(
+          columns: (auto, 1fr, auto),
+          rows: (auto,),
+          heading(
+            depth: 1,
+            bookmarked: false,
+            outlined: false,
+          )[#if exists(url) { link(url, name) } else { name } #actions],
+          [],
+          heading(
+            depth: 1,
+            bookmarked: false,
+            outlined: false,
+          )[#kind #level],
         )
-        set align(bottom)
-        it
-      }
-      grid(
-        columns: (auto, 1fr, auto),
-        rows: (auto,),
-        heading(
-          depth: 1, 
-          bookmarked: false, 
-          outlined: false)[#if exists(url) {link(url, name)} else {name} #actions],
-        [],
-        heading( 
-          depth: 1, 
-          bookmarked: false, 
-          outlined: false)[#kind #level],
-      )
-      hr()
-      print_traits(traits, theme: theme)
-    }, breakable: false)
+        hr()
+        print_traits(traits, theme: theme)
+      },
+      breakable: false,
+    )
     set text(font: theme.block_font, size: theme.block_font_size)
     set terms(tight: true)
     //set block(spacing: 0em)
     //set par(spacing: 0.6em)
-    if hanging {hang(body)}
-    else {straight(body)}
-  }
+    if hanging { hang(body) } else { straight(body) }
+  },
 )
 
 #let feature(name, right, theme: THEME, actions: none) = {
   set par(justify: true)
-    block(below: 0.5em,{
+  block(
+    below: 0.5em,
+    {
       show heading: it => {
         set text(
           font: theme.block_heading_font,
@@ -182,42 +207,54 @@
         columns: (auto, 1fr, auto),
         rows: (auto,),
         heading(
-          depth: 1, 
-          bookmarked: false, 
-          outlined: false)[#name #actions],
+          depth: 1,
+          bookmarked: false,
+          outlined: false,
+        )[#name #actions],
         [],
-        heading( 
-          depth: 1, 
-          bookmarked: false, 
-          outlined: false, [#right]),
+        heading(
+          depth: 1,
+          bookmarked: false,
+          outlined: false,
+          [#right],
+        ),
       )
-    }, breakable: false)
+    },
+    breakable: false,
+  )
 }
 
-#let notebox(body, size: 100%, theme: THEME) = block(width: size, fill: theme.notebox_background_color, inset: 12pt, breakable: false, stroke: theme.accent,
+#let notebox(body, size: 100%, theme: THEME) = block(
+  width: size,
+  fill: theme.notebox_background_color,
+  inset: 12pt,
+  breakable: false,
+  stroke: theme.accent,
   {
     set heading(bookmarked: false, outlined: false, offset: 0)
     show heading: head => {
       set text(font: theme.small_heading_font, weight: "black", fill: black)
-      align(center)[#{if head.level == 1 {upper(head)} else {head}}]
+      align(center)[#{ if head.level == 1 { upper(head) } else { head } }]
     }
     set text(font: theme.block_font, size: theme.block_font_size)
     set align(left)
     body
-  }
+  },
 )
 
-#let infobox(..body, size: 100%, theme: THEME) = block(width: size, fill: theme.infobox_color, inset: 12pt, breakable: false,
+#let infobox(..body, size: 100%, theme: THEME) = block(
+  width: size,
+  fill: theme.infobox_color,
+  inset: 12pt,
+  breakable: false,
   {
     set heading(bookmarked: false, outlined: false, offset: 0)
     set text(fill: white)
     show heading: head => {
       set text(font: theme.small_heading_font, weight: "black", fill: white)
-      align(left)[#{if head.level == 1 {upper(head)} else {head}}]
+      align(left)[#{ if head.level == 1 { upper(head) } else { head } }]
     }
-    show heading.where(level: 2): set text(
-      top-edge: 0pt
-    )
+    show heading.where(level: 2): set text(top-edge: 0pt)
     set text(font: theme.block_font, size: theme.block_font_size)
     set align(left)
     let cols = ()
@@ -231,10 +268,14 @@
       }
     }
     grid(columns: cols, column-gutter: 0.8em, inset: 0.8em, ..cont)
-  }
+  },
 )
 
-#let rulebox(body, size: 100%, theme: THEME) = block(width: size, fill: theme.rulebox_background_color, inset: 12pt, breakable: false,
+#let rulebox(body, size: 100%, theme: THEME) = block(
+  width: size,
+  fill: theme.rulebox_background_color,
+  inset: 12pt,
+  breakable: false,
   {
     set heading(bookmarked: false, outlined: false, offset: 0)
     set text(fill: black)
@@ -242,48 +283,61 @@
       set text(font: theme.small_heading_font, weight: "black", fill: black)
       align(center)[#head]
     }
-    show heading.where(level: 2): set text(
-      top-edge: 0pt
-    )
+    show heading.where(level: 2): set text(top-edge: 0pt)
     set text(font: theme.block_font, size: theme.block_font_size)
     set align(left)
     body
-  }
+  },
 )
 
-#let banner(body, theme: THEME, /*page_break: true*/) = {
+#let banner(body, theme: THEME /*page_break: true*/) = {
   //if page_break {pagebreak()}
-  place(top, float: true, scope: "parent",
-  block(width: 100%, fill: theme.notebox_background_color, inset: 12pt, breakable: false, stroke: (bottom: theme.accent + 2pt),
-    {
-      set heading(offset: 0)
-      //show heading.where(level: 3).or(heading.where(level: 4)): set heading(outlined: false)
-      set text(font: theme.main_text_font, style: "italic", weight: "black", fill: theme.first_level_heading_color, size: theme.title_text_font_size)
-      show heading: head => {
-        set text(fill: theme.first_level_heading_color, font: theme.big_heading_font)
-        set block(spacing: 4pt)
-        align(if calc.odd(head.level) {center} else {left})[#head]
-      }
-      show heading.where(level: 1): it => {
-        set text(size: theme.title_font_size)
-        it
-      }
-      show heading.where(level: 1, outlined: false): it => {
-        heading(depth: 1, outlined: true, it)
-      }
-      show heading.where(level: 2): it => {
-        set text(size: theme.title_font_size)
-        it
-      }
-      show heading.where(level: 2, outlined: false): it => {
-        heading(depth: 2, outlined: true, it)
-      }
-      show heading.where(level: 3): set text(size: theme.subtitle_font_size)
-      show heading.where(level: 4): set text(size: theme.subtitle_font_size)
-      set align(left)
-      body
-    }
-  ))
+  place(
+    top,
+    float: true,
+    scope: "parent",
+    block(
+      width: 100%,
+      fill: theme.notebox_background_color,
+      inset: 12pt,
+      breakable: false,
+      stroke: (bottom: theme.accent + 2pt),
+      {
+        set heading(offset: 0)
+        //show heading.where(level: 3).or(heading.where(level: 4)): set heading(outlined: false)
+        set text(
+          font: theme.main_text_font,
+          style: "italic",
+          weight: "black",
+          fill: theme.first_level_heading_color,
+          size: theme.title_text_font_size,
+        )
+        show heading: head => {
+          set text(fill: theme.first_level_heading_color, font: theme.big_heading_font)
+          set block(spacing: 4pt)
+          align(if calc.odd(head.level) { center } else { left })[#head]
+        }
+        show heading.where(level: 1): it => {
+          set text(size: theme.title_font_size)
+          it
+        }
+        show heading.where(level: 1, outlined: false): it => {
+          heading(depth: 1, outlined: true, it)
+        }
+        show heading.where(level: 2): it => {
+          set text(size: theme.title_font_size)
+          it
+        }
+        show heading.where(level: 2, outlined: false): it => {
+          heading(depth: 2, outlined: true, it)
+        }
+        show heading.where(level: 3): set text(size: theme.subtitle_font_size)
+        show heading.where(level: 4): set text(size: theme.subtitle_font_size)
+        set align(left)
+        body
+      },
+    ),
+  )
 }
 
 #let sidebar_body(body, theme: THEME) = {
@@ -309,3 +363,31 @@
 #let th(body) = {
   body
 }
+
+#let Proficiencies = (
+  untrained: "Untrained",
+  trained: "Trained",
+  expert: "Expert",
+  master: "Master",
+  legendary: "Legendary",
+  mythic: "Mythic",
+)
+
+#let Damages = (
+  piercing: "Piercing",
+  slashing: "Slashing",
+  bludgeoning: "Bludgeoning",
+  force: "Force",
+  acid: "Acid",
+  cold: "Cold",
+  electricity: "Electricity",
+  fire: "Fire",
+  sonic: "Sonic",
+  spirit: "Spirit",
+  void: "Void",
+  vitality: "Vitality",
+  mental: "Mental",
+  poison: "Poison",
+  bleed: "Bleed",
+  precision: "Precision",
+)

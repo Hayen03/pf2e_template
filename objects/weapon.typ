@@ -12,6 +12,8 @@
   simple: "Simple",
   martial: "Martial",
   advanced: "Advanced",
+  improvised: "Improvised",
+  unarmed: "Unarmed",
 )
 #let weapon_group = (
   axe: "Axe",
