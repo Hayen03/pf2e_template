@@ -391,3 +391,29 @@
   bleed: "Bleed",
   precision: "Precision",
 )
+
+#let Saves = (
+  fortitude: "Fortitude",
+  reflex: "Reflex",
+  will: "Will",
+)
+
+#let Skills = (
+  acrobatics: "Acrobatics",
+  arcana: "Arcana",
+  athletics: "Athletics",
+  crafting: "Crafting",
+  deception: "Deception",
+  diplomacy: "Diplomacy",
+  intimidation: "Intimidation",
+  lore: "Lore",
+  medicine: "Medicine",
+  nature: "Nature",
+  occultism: "Occultism",
+  performance: "Performance",
+  religion: "Religion",
+  society: "Society",
+  stealth: "Stealth",
+  survival: "Survival",
+  thievery: "Thievery",
+)

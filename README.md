@@ -722,3 +722,27 @@ Here are the names and values for each enumeration
 - poison
 - bleed
 - precision
+
+### Saves
+- fortitude
+- reflex
+- will
+
+### Skills
+- acrobatics
+- arcana
+- athletics
+- crafting
+- deception
+- diplomacy
+- intimidation
+- lore
+- medicine
+- nature
+- occultism
+- performance
+- religion
+- society
+- stealth
+- survival
+- thievery
