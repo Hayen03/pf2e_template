@@ -1,6 +1,7 @@
 #import "../base.typ": *
 #import "common.typ": *
 #import "spell.typ": mk_spell_list
+#import "affliction.typ": mk_affliction_inline
 
 #let class_item = "item"
 #let class_variant = "variant"
@@ -236,7 +237,7 @@
       bloc.push(mk_spell_list(spell_list))
     }
     #for affliction in variant.afflictions {
-      bloc.push(mk_affliction_inline(affliction, theme: theme, breakable: breakable, short: short, hide: hide))
+      bloc.push(mk_affliction_inline(affliction))
     }
     #bloc.filter(it => exists(it)).join(parbreak())
   ]
@@ -296,7 +297,7 @@
       b.push(mk_spell_list(spell_list))
     }
     #for affliction in item.afflictions {
-      b.push(mk_affliction_inline(affliction, theme: theme, breakable: breakable, short: short, hide: hide))
+      b.push(mk_affliction_inline(affliction))
     }
     #let b = b.filter(it => exists(it))
     #if b.len() > 0 {

@@ -1,6 +1,7 @@
 #import "../base.typ": *
 #import "common.typ": *
 #import "item.typ": mk_variant, mk_activation
+#import "affliction.typ": mk_affliction_inline
 
 #let class_armor = "armor"
 
@@ -153,7 +154,7 @@
       b.push(mk_spell_list(spell_list))
     }
     #for affliction in armor.afflictions {
-      b.push(mk_affliction_inline(affliction, theme: theme, breakable: breakable, short: short, hide: hide))
+      b.push(mk_affliction_inline(affliction))
     }
     #let b = b.filter(it => exists(it))
     #if b.len() > 0 {

@@ -2,6 +2,7 @@
 #import "common.typ": *
 #import "item.typ": mk_variant, new_activation, mk_activation
 #import "spell.typ": mk_spell_list, new_spell_list
+#import "affliction.typ": mk_affliction_inline
 
 #let class_wand = "wand"
 
@@ -130,7 +131,7 @@
       b.push(mk_spell_list(spell_list))
     }
     #for affliction in item.afflictions {
-      b.push(mk_affliction_inline(affliction, theme: theme, breakable: breakable, short: short, hide: hide))
+      b.push(mk_affliction_inline(affliction))
     }
     #let b = b.filter(it => exists(it))
     #if b.len() > 0 {
