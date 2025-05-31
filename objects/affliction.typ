@@ -51,6 +51,7 @@
   let prelude = (
     [*#affliction.name*],
     if exists(affliction.traits) [(#affliction.traits.join(", "))],
+    if exists(affliction.level) [(level #affliction.level)],
   )
   let save = [*Saving Throw* #(if exists(affliction.save) { affliction.save }, if exists(affliction.dc) [DC #affliction.dc]).filter(exists).join(" ")]
   let parts = (
