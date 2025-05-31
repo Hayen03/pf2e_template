@@ -46,6 +46,7 @@
   extras: (:),
   image: none,
   short_desc: none,
+  afflictions: (),
 ) = (
   class: class_item,
   variant: variant,
@@ -78,6 +79,7 @@
   image: image,
   extras: extras,
   short_desc: short_desc,
+  afflictions: as_list(afflictions),
 )
 #let new_activation(
   name: none,
@@ -137,6 +139,7 @@
   spell_lists: (),
   activations: (),
   short_desc: none,
+  afflictions: (),
 ) = (
   class: class_variant,
   name: name,
@@ -160,6 +163,7 @@
   spell_lists: as_list(spell_lists),
   activations: as_list(activations),
   short_desc: short_desc,
+  afflictions: as_list(afflictions),
 )
 #let mk_activation(activation, theme: THEME, breakable: auto, short: false, hide: false) = {
   let name = [Activation#if exists(activation.name) [---#activation.name]]
@@ -231,6 +235,9 @@
     #for spell_list in variant.spell_lists {
       bloc.push(mk_spell_list(spell_list))
     }
+    #for affliction in variant.afflictions {
+      bloc.push(mk_affliction_inline(affliction, theme: theme, breakable: breakable, short: short, hide: hide))
+    }
     #bloc.filter(it => exists(it)).join(parbreak())
   ]
 }
@@ -287,6 +294,9 @@
     #let b = ()
     #for spell_list in item.spell_lists {
       b.push(mk_spell_list(spell_list))
+    }
+    #for affliction in item.afflictions {
+      b.push(mk_affliction_inline(affliction, theme: theme, breakable: breakable, short: short, hide: hide))
     }
     #let b = b.filter(it => exists(it))
     #if b.len() > 0 {

@@ -151,6 +151,7 @@
   image: none,
   extras: (:),
   short_desc: none,
+  afflictions: (),
 ) = (
   class: class_weapon,
   name: name,
@@ -194,6 +195,7 @@
   image: image,
   extras: extras,
   short_desc: short_desc,
+  afflictions: as_list(afflictions),
 )
 #let mk_weapon(weapon, theme: THEME, breakable: auto, short: (), hide: ()) = {
   itembox(
@@ -274,6 +276,9 @@
     #let b = ()
     #for spell_list in weapon.spell_lists {
       b.push(mk_spell_list(spell_list))
+    }
+    #for affliction in weapon.afflictions {
+      b.push(mk_affliction_inline(affliction, theme: theme, breakable: breakable, short: short, hide: hide))
     }
     #let b = b.filter(it => exists(it))
     #if b.len() > 0 {

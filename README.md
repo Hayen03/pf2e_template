@@ -198,6 +198,7 @@ Items are for all sorts of mundane and magical items. Can be created with `new_i
 - `extra`: `dict`, dictionary of extra data on this object
 - `image`: `content`, image for this object
 - `short_desc`: `content`, a short description of the object. Useful when creating tables. Default `none`.
+- `afflictions`: `array`, list of afflictions associated with this item. Useful for alchemical poison. Default `()`
 
 ### Activations
 
