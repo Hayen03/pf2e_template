@@ -12,6 +12,67 @@
 #let L = 0.1
 #let null = [---]
 
+#let Proficiencies = (
+  untrained: "Untrained",
+  trained: "Trained",
+  expert: "Expert",
+  master: "Master",
+  legendary: "Legendary",
+  mythic: "Mythic",
+)
+
+#let Damages = (
+  piercing: "Piercing",
+  slashing: "Slashing",
+  bludgeoning: "Bludgeoning",
+  force: "Force",
+  acid: "Acid",
+  cold: "Cold",
+  electricity: "Electricity",
+  fire: "Fire",
+  sonic: "Sonic",
+  spirit: "Spirit",
+  void: "Void",
+  vitality: "Vitality",
+  mental: "Mental",
+  poison: "Poison",
+  bleed: "Bleed",
+  precision: "Precision",
+)
+
+#let Saves = (
+  fortitude: "Fortitude",
+  reflex: "Reflex",
+  will: "Will",
+)
+
+#let Skills = (
+  acrobatics: "Acrobatics",
+  arcana: "Arcana",
+  athletics: "Athletics",
+  crafting: "Crafting",
+  deception: "Deception",
+  diplomacy: "Diplomacy",
+  intimidation: "Intimidation",
+  lore: "Lore",
+  medicine: "Medicine",
+  nature: "Nature",
+  occultism: "Occultism",
+  performance: "Performance",
+  religion: "Religion",
+  society: "Society",
+  stealth: "Stealth",
+  survival: "Survival",
+  thievery: "Thievery",
+)
+
+#let Results = (
+  critical_success: "Critical Success",
+  success: "Success",
+  failure: "Failure",
+  critical_failure: "Critical Failure",
+)
+
 #let hr(fill: black) = {
   set block(above: 5pt, below: 5pt)
   line(length: 100%, stroke: fill)
@@ -364,56 +425,24 @@
   body
 }
 
-#let Proficiencies = (
-  untrained: "Untrained",
-  trained: "Trained",
-  expert: "Expert",
-  master: "Master",
-  legendary: "Legendary",
-  mythic: "Mythic",
-)
-
-#let Damages = (
-  piercing: "Piercing",
-  slashing: "Slashing",
-  bludgeoning: "Bludgeoning",
-  force: "Force",
-  acid: "Acid",
-  cold: "Cold",
-  electricity: "Electricity",
-  fire: "Fire",
-  sonic: "Sonic",
-  spirit: "Spirit",
-  void: "Void",
-  vitality: "Vitality",
-  mental: "Mental",
-  poison: "Poison",
-  bleed: "Bleed",
-  precision: "Precision",
-)
-
-#let Saves = (
-  fortitude: "Fortitude",
-  reflex: "Reflex",
-  will: "Will",
-)
-
-#let Skills = (
-  acrobatics: "Acrobatics",
-  arcana: "Arcana",
-  athletics: "Athletics",
-  crafting: "Crafting",
-  deception: "Deception",
-  diplomacy: "Diplomacy",
-  intimidation: "Intimidation",
-  lore: "Lore",
-  medicine: "Medicine",
-  nature: "Nature",
-  occultism: "Occultism",
-  performance: "Performance",
-  religion: "Religion",
-  society: "Society",
-  stealth: "Stealth",
-  survival: "Survival",
-  thievery: "Thievery",
-)
+#let result(
+  success: none,
+  failure: none,
+  critical_success: none,
+  critical_failure: none,
+  order: (Results.critical_failure, Results.failure, Results.success, Results.critical_success),
+) = {
+  let res = (:)
+  if exists(critical_failure) { res.insert(Results.critical_failure)[*Critical Failure* #critical_failure] }
+  if exists(failure) { res.insert(Results.failure)[*Failure* #failure] }
+  if exists(success) { res.insert(Results.success)[*Success* #success] }
+  if exists(critical_success) { res.insert(Results.critical_success)[*Critical Success* #critical_success] }
+  let bloc = ()
+  for cat in order {
+    if cat in res {
+      bloc.push(res.at(cat))
+    }
+  }
+  if bloc.len() > 0 { linebreak() }
+  bloc.join(linebreak())
+}
