@@ -20,6 +20,7 @@
   extras: (:),
   image: none,
   short_desc: none,
+  description: [],
 ) = (
   name: name,
   class: class_affliction,
@@ -38,6 +39,7 @@
   extras: extras,
   image: image,
   short_desc: short_desc,
+  description: description,
 )
 
 #let new_stage(body, duration: none) = (

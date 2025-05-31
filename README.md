@@ -598,6 +598,7 @@ Afflictions can be created with the `new_affliction()` function and its associat
 - `extras`: `dict`, dictionary of extra data on this object
 - `image`: `content`, image for this object. Default `none`.
 - `short_desc`: `content`, a short description of the object. Useful when creating tables. Default `none`.
+- `description`: `content`, a longer description of the affliction. Default `[]`
 
 ## Enumerations
 Here are the names and values for each enumeration
