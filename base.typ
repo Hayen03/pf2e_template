@@ -129,21 +129,19 @@
   ) { theme.unique_tag_color } else if tg in size_tag_list { theme.size_tag_color } else if tg in alignement_tag_list {
     theme.alignement_tag_color
   } else { theme.tag_color }
-  box(
-    rect(
-      height: auto,
-      width: auto,
-      fill: fill,
-      stroke: (
-        x: 3pt + theme.tag_border_color,
-        y: 2pt + theme.tag_border_color,
-      ),
-      inset: (
-        x: 0% + 6pt,
-        y: 0% + 3pt,
-      ),
-    )[#tg],
-  )
+  box(rect(
+    height: auto,
+    width: auto,
+    fill: fill,
+    stroke: (
+      x: 3pt + theme.tag_border_color,
+      y: 2pt + theme.tag_border_color,
+    ),
+    inset: (
+      x: 0% + 6pt,
+      y: 0% + 3pt,
+    ),
+  )[#tg])
 }
 #let trait_sorting_key(name) = {
   if name in rarity_tag_list {
@@ -273,12 +271,7 @@
           outlined: false,
         )[#name #actions],
         [],
-        heading(
-          depth: 1,
-          bookmarked: false,
-          outlined: false,
-          [#right],
-        ),
+        heading(depth: 1, bookmarked: false, outlined: false, [#right]),
       )
     },
     breakable: false,
@@ -353,52 +346,47 @@
 
 #let banner(body, theme: THEME /*page_break: true*/) = {
   //if page_break {pagebreak()}
-  place(
-    top,
-    float: true,
-    scope: "parent",
-    block(
-      width: 100%,
-      fill: theme.notebox_background_color,
-      inset: 12pt,
-      breakable: false,
-      stroke: (bottom: theme.accent + 2pt),
-      {
-        set heading(offset: 0)
-        //show heading.where(level: 3).or(heading.where(level: 4)): set heading(outlined: false)
-        set text(
-          font: theme.main_text_font,
-          style: "italic",
-          weight: "black",
-          fill: theme.first_level_heading_color,
-          size: theme.title_text_font_size,
-        )
-        show heading: head => {
-          set text(fill: theme.first_level_heading_color, font: theme.big_heading_font)
-          set block(spacing: 4pt)
-          align(if calc.odd(head.level) { center } else { left })[#head]
-        }
-        show heading.where(level: 1): it => {
-          set text(size: theme.title_font_size)
-          it
-        }
-        show heading.where(level: 1, outlined: false): it => {
-          heading(depth: 1, outlined: true, it)
-        }
-        show heading.where(level: 2): it => {
-          set text(size: theme.title_font_size)
-          it
-        }
-        show heading.where(level: 2, outlined: false): it => {
-          heading(depth: 2, outlined: true, it)
-        }
-        show heading.where(level: 3): set text(size: theme.subtitle_font_size)
-        show heading.where(level: 4): set text(size: theme.subtitle_font_size)
-        set align(left)
-        body
-      },
-    ),
-  )
+  place(top, float: true, scope: "parent", block(
+    width: 100%,
+    fill: theme.notebox_background_color,
+    inset: 12pt,
+    breakable: false,
+    stroke: (bottom: theme.accent + 2pt),
+    {
+      set heading(offset: 0)
+      //show heading.where(level: 3).or(heading.where(level: 4)): set heading(outlined: false)
+      set text(
+        font: theme.main_text_font,
+        style: "italic",
+        weight: "black",
+        fill: theme.first_level_heading_color,
+        size: theme.title_text_font_size,
+      )
+      show heading: head => {
+        set text(fill: theme.first_level_heading_color, font: theme.big_heading_font)
+        set block(spacing: 4pt)
+        align(if calc.odd(head.level) { center } else { left })[#head]
+      }
+      show heading.where(level: 1): it => {
+        set text(size: theme.title_font_size)
+        it
+      }
+      show heading.where(level: 1, outlined: false): it => {
+        heading(depth: 1, outlined: true, it)
+      }
+      show heading.where(level: 2): it => {
+        set text(size: theme.title_font_size)
+        it
+      }
+      show heading.where(level: 2, outlined: false): it => {
+        heading(depth: 2, outlined: true, it)
+      }
+      show heading.where(level: 3): set text(size: theme.subtitle_font_size)
+      show heading.where(level: 4): set text(size: theme.subtitle_font_size)
+      set align(left)
+      body
+    },
+  ))
 }
 
 #let sidebar_body(body, theme: THEME) = {
@@ -445,4 +433,17 @@
   }
   if bloc.len() > 0 { linebreak() }
   bloc.join(linebreak())
+}
+
+#let capitalize(str) = {
+  str
+    .split(regex("\s+"))
+    .map(word => {
+      if word.len() > 0 {
+        upper(word.at(0)) + lower(word.slice(1))
+      } else {
+        word
+      }
+    })
+    .join(" ")
 }
